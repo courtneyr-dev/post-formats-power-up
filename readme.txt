@@ -1,6 +1,6 @@
 === Post Formats for Block Themes ===
 Contributors: courane01
-Donate link: https://buymeacoffee.com/courane01
+Donate link: https://github.com/sponsors/courtneyr-dev
 Tags: post-formats, block-theme, patterns, gutenberg, accessibility, chat-log, conversation, block-editor
 Requires at least: 6.8
 Tested up to: 6.8
@@ -39,19 +39,19 @@ Each WordPress post format gets a professionally-designed block pattern optimize
 - **Standard** – Traditional blog post with full title, featured image, and content blocks
 - **Aside** – Short note or update displayed in a styled bubble container without title requirement
 - **Status** – Twitter-style status update with 280-character validation and real-time counter
-- **Link** – Link sharing with automatic Bookmark Card integration (when plugin available)
+- **Link** – Link sharing with automatic [Bookmark Card](https://wordpress.org/plugins/bookmark-card/) integration when available, with graceful fallback to standard linked paragraphs
 - **Gallery** – Photo gallery starting with a locked gallery block for image collections
 - **Image** – Single image post with prominent image display and caption support
 - **Quote** – Quotation or citation with enhanced pullquote styling and attribution
-- **Video** – Video content using native video blocks or popular embed services
-- **Audio** – Audio file or podcast embed with native player styling
+- **Video** – Video content using native video blocks or popular embed services. Integrates with [Able Player](https://wordpress.org/plugins/ableplayer/) for enhanced accessible playback when available.
+- **Audio** – Audio file or podcast embed with native player styling. Integrates with [Podlove Podcasting Plugin](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) for podcasts and [Able Player](https://wordpress.org/plugins/ableplayer/) for accessible playback when available.
 - **Chat** – Conversation transcript using the integrated Chat Log block
 
 **Integrated Chat Log Block**
 
 **No separate plugin needed!** Post Formats for Block Themes includes a full-featured Chat Log block for displaying conversation transcripts. Perfect for interviews, customer support examples, team discussions, or any dialogue format.
 
-Supported platforms: Slack, Discord, Microsoft Teams, WhatsApp, Telegram, Signal, and generic chat transcripts.
+Supported platforms: Slack, Discord, Microsoft Teams, WhatsApp, Telegram, Signal, and generic chat transcripts. Additional file format support: SRT subtitles, VTT captions, .docx documents, and .html files.
 
 Chat Log features: automatic platform detection, avatar display, timestamp formatting (relative, absolute, time-only), multiple display styles (bubbles, IRC, transcript, timeline), thread collapsing, participant lists, device frames, full accessibility, and RTL support.
 
@@ -74,10 +74,6 @@ The Status format includes Twitter-style character validation with real-time cou
 **Post Format Repair Tool**
 
 Scan existing posts and fix format mismatches with the built-in repair tool (Tools → Post Format Repair). Detects content/format mismatches, bulk or individual repairs, preview suggestions, one-click fixes. Perfect for migrating from classic themes.
-
-**Full WCAG 2.2 AA Accessibility Compliance**
-
-Every feature meets Web Content Accessibility Guidelines 2.2 Level AA: keyboard navigation, screen reader support with ARIA labels, semantic HTML, 4.5:1 color contrast, focus management, ARIA live regions, RTL support. Tested with NVDA, JAWS, and VoiceOver.
 
 **Theme-Agnostic Styling**
 
@@ -189,10 +185,10 @@ What transfers: format assignments, post content, featured images, post meta. Wh
 = Block Theme Compatibility Guide =
 
 **What Makes a "Block Theme":**
-Block themes use block templates (.html files) and theme.json instead of PHP templates. Key characteristics: templates/ folder with .html files, theme.json file, Full Site Editing support, activated via Appearance → Themes.
+Block themes use block templates (.html files) and theme.json instead of PHP templates. Key characteristics: templates/ folder with .html files, theme.json file, Full Site Editing support, activated via Appearance → Themes. Learn more in the [WordPress Block Theme documentation](https://developer.wordpress.org/themes/block-themes/).
 
 **Why Classic Themes Aren't Supported:**
-Classic themes use PHP template files which conflict with block-based patterns. This plugin requires block pattern support, block templates, theme.json styling, and block editor integration.
+Classic themes use PHP template files which conflict with block-based patterns. This plugin requires block pattern support, block templates, theme.json styling, and block editor integration. If you prefer using a classic theme with post format support, consider using the [Twenty Thirteen theme](https://wordpress.org/themes/twentythirteen/) which includes excellent built-in post format styling.
 
 **Recommended Compatible Block Themes:**
 Twenty Twenty-Five, Twenty Twenty-Four, Twenty Twenty-Three, Block themes from Automattic (Blank Canvas, Pendant), most modern block themes on WordPress.org.
@@ -303,15 +299,19 @@ No, 280-character limit is a soft suggestion, not a hard block. Shows real-time 
 
 = What is the Bookmark Card integration? =
 
-Link format checks if Bookmark Card plugin is installed. If active, uses bookmark-card blocks with rich previews, images, descriptions, automatic metadata fetching. If not installed, uses standard linked paragraphs. Both work perfectly—integration just enhances experience.
+Link format checks if the [Bookmark Card plugin](https://wordpress.org/plugins/bookmark-card/) is installed. If active, uses bookmark-card blocks with rich previews, images, descriptions, automatic metadata fetching. If not installed, uses standard linked paragraphs. Both work perfectly—integration just enhances experience.
+
+= Does this work with podcasting plugins? =
+
+Yes! The Audio format integrates with the [Podlove Podcasting Plugin for WordPress](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) when installed. If Podlove is active, Audio format patterns can utilize Podlove's enhanced audio player and podcast metadata. Without Podlove, the plugin uses WordPress core audio blocks which work perfectly for standard audio content.
+
+= What about accessible media players? =
+
+The Video and Audio formats integrate with [Able Player](https://wordpress.org/plugins/ableplayer/) when installed. Able Player provides an accessible HTML5 media player with captions, audio descriptions, interactive transcripts, and full keyboard support. When Able Player is active, format patterns can utilize its enhanced accessible playback features. Without Able Player, the plugin uses WordPress core media blocks.
 
 = How do I use the Chat format? =
 
 **You don't need a separate plugin!** Post Formats for Block Themes includes integrated Chat Log block (chatlog/conversation). Chat format works out of the box, no additional plugins required. Just select Chat format and paste conversation transcripts from Slack, Discord, Teams, WhatsApp, Signal, or Telegram.
-
-= Is this plugin accessible? =
-
-Yes! Full **WCAG 2.2 Level AA compliance**: keyboard navigation (Tab, Enter, Space, Escape, Arrow keys), screen reader support (ARIA labels, live regions, semantic headings), visual accessibility (4.5:1 contrast, focus indicators, readable fonts). Tested with NVDA, JAWS, VoiceOver, Windows Narrator.
 
 = Can I change formats after creating a post? =
 
@@ -363,7 +363,6 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 * **Added:** Chat Log display styles: bubbles, IRC, transcript, timeline with full customization options
 * **Added:** Bookmark Card plugin integration for Link format with graceful fallback to standard linked paragraphs
 * **Added:** Theme-agnostic styling using CSS custom properties from theme.json for seamless integration
-* **Added:** Full WCAG 2.2 AA accessibility compliance throughout all plugin features
 * **Added:** Complete keyboard navigation for all interactive elements (modals, switcher, patterns)
 * **Added:** Screen reader support with ARIA labels, live regions, and semantic HTML structure
 * **Added:** RTL language support for international WordPress sites
@@ -409,9 +408,7 @@ Contributions welcome! Report bugs on GitHub, submit pull requests, translate vi
 
 = Credits =
 
-Inspired by WordPress Twenty Thirteen theme's post format treatments. Built with WordPress Gutenberg components for maximum accessibility. Icons by Dashicons. Accessibility testing with axe-core, NVDA, JAWS, VoiceOver. Developed by Courtney Robertson. License: GPL v2 or later.
-
-Special thanks to: WordPress core team, Gutenberg contributors, WordPress.org plugin review team, beta testers, everyone who provided feedback.
+Inspired by WordPress Twenty Thirteen theme's post format treatments. Built with WordPress Gutenberg components. Icons by Dashicons. Developed by Courtney Robertson. License: GPL v2 or later.
 
 = External Services =
 

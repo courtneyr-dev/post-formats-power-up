@@ -29,6 +29,7 @@ gulpfile.js
 
 # Documentation (keep only readme.txt for WordPress.org)
 /docs
+/img
 README.md
 CONTRIBUTING.md
 CODE_OF_CONDUCT.md
@@ -38,6 +39,8 @@ QA-TEST-PLAN.md
 SITE-EDITOR-GUIDE.md
 SITE-EDITOR-IMPLEMENTATION.md
 STYLING-SUMMARY.md
+PLUGIN-DEVELOPMENT-WORKFLOW.md
+WORDPRESS-ORG-SUBMISSION-CHECKLIST.md
 potomatic.json
 
 # OS Files
@@ -63,8 +66,14 @@ npm-debug.log*
 # Backup files
 *~
 *.bak
+*.bak2
+*.bak3
 *.tmp
 *.temp
+*.backup
+
+# Distribution files
+*.zip
 
 # Test artifacts
 /test-results

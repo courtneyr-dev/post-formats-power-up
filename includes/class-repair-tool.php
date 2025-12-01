@@ -38,6 +38,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 class PFBT_Repair_Tool {
 
 	/**
+	 * Enqueue admin styles for repair tool page
+	 *
+	 * @since 1.0.0
+	 */
+	public static function enqueue_styles() {
+		$custom_css = '
+			.pfpu-repair-summary.card {
+				padding: 20px;
+				background: #fff;
+				border: 1px solid #ccd0d4;
+				box-shadow: 0 1px 1px rgba(0,0,0,.04);
+				margin-top: 20px;
+			}
+			.pfpu-repair-summary table {
+				margin-top: 15px;
+			}
+			.pfpu-repair-summary th {
+				width: 200px;
+				font-weight: 600;
+			}
+			.pfpu-mismatches table {
+				margin-top: 15px;
+			}
+			.pfpu-mismatches code {
+				background: #f0f0f1;
+				padding: 2px 6px;
+				border-radius: 3px;
+			}
+		';
+		wp_add_inline_style( 'wp-admin', $custom_css );
+	}
+
+	/**
 	 * Render the repair tool page
 	 *
 	 * @since 1.0.0
@@ -51,6 +84,9 @@ class PFBT_Repair_Tool {
 				array( 'response' => 403 )
 			);
 		}
+
+		// Enqueue styles for this page.
+		self::enqueue_styles();
 
 		// Handle form submissions with nonce verification.
 		if ( isset( $_POST['pfbt_repair_action'] ) &&

@@ -19,18 +19,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Only define constants if not already defined (allow standalone plugin to take precedence)
-if ( ! defined( 'CHATLOG_VERSION' ) ) {
-	define( 'CHATLOG_VERSION', '1.0.0' );
+// Define constants with PFBT prefix to avoid conflicts
+if ( ! defined( 'PFBT_CHATLOG_VERSION' ) ) {
+	define( 'PFBT_CHATLOG_VERSION', '1.0.0' );
 }
-if ( ! defined( 'CHATLOG_PLUGIN_DIR' ) ) {
-	define( 'CHATLOG_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'PFBT_CHATLOG_PLUGIN_DIR' ) ) {
+	define( 'PFBT_CHATLOG_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
-if ( ! defined( 'CHATLOG_PLUGIN_URL' ) ) {
-	define( 'CHATLOG_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'PFBT_CHATLOG_PLUGIN_URL' ) ) {
+	define( 'PFBT_CHATLOG_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
-if ( ! defined( 'CHATLOG_PLUGIN_FILE' ) ) {
-	define( 'CHATLOG_PLUGIN_FILE', __FILE__ );
+if ( ! defined( 'PFBT_CHATLOG_PLUGIN_FILE' ) ) {
+	define( 'PFBT_CHATLOG_PLUGIN_FILE', __FILE__ );
 }
 
 /**
@@ -56,9 +56,9 @@ if ( ! defined( 'CHATLOG_PLUGIN_FILE' ) ) {
  *
  * @since 1.0.0
  *
- * @global string CHATLOG_VERSION Plugin version constant
- * @global string CHATLOG_PLUGIN_URL Plugin URL constant
- * @global string CHATLOG_PLUGIN_DIR Plugin directory constant
+ * @global string PFBT_CHATLOG_VERSION Plugin version constant
+ * @global string PFBT_CHATLOG_PLUGIN_URL Plugin URL constant
+ * @global string PFBT_CHATLOG_PLUGIN_DIR Plugin directory constant
  *
  * @return void
  */
@@ -67,7 +67,7 @@ if ( ! function_exists( 'chatlog_register_block' ) ) {
 		// Register block script
 		wp_register_script(
 			'chatlog-block-editor',
-			CHATLOG_PLUGIN_URL . 'build/index.js',
+			PFBT_CHATLOG_PLUGIN_URL . 'build/index.js',
 			array(
 				'wp-blocks',
 				'wp-element',
@@ -76,7 +76,7 @@ if ( ! function_exists( 'chatlog_register_block' ) ) {
 				'wp-i18n',
 				'wp-data',
 			),
-			CHATLOG_VERSION,
+			PFBT_CHATLOG_VERSION,
 			true
 		);
 
@@ -84,28 +84,28 @@ if ( ! function_exists( 'chatlog_register_block' ) ) {
 		wp_set_script_translations(
 			'chatlog-block-editor',
 			'post-formats-for-block-themes',
-			CHATLOG_PLUGIN_DIR . 'languages'
+			PFBT_CHATLOG_PLUGIN_DIR . 'languages'
 		);
 
 		// Register editor styles
 		wp_register_style(
 			'chatlog-block-editor',
-			CHATLOG_PLUGIN_URL . 'build/index.css',
+			PFBT_CHATLOG_PLUGIN_URL . 'build/index.css',
 			array( 'wp-edit-blocks' ),
-			CHATLOG_VERSION
+			PFBT_CHATLOG_VERSION
 		);
 
 		// Register frontend styles
 		wp_register_style(
 			'chatlog-block-style',
-			CHATLOG_PLUGIN_URL . 'build/style-index.css',
+			PFBT_CHATLOG_PLUGIN_URL . 'build/style-index.css',
 			array(),
-			CHATLOG_VERSION
+			PFBT_CHATLOG_VERSION
 		);
 
 		// Register the block
 		register_block_type(
-			CHATLOG_PLUGIN_DIR . 'build/block.json',
+			PFBT_CHATLOG_PLUGIN_DIR . 'build/block.json',
 			array(
 				'render_callback' => 'chatlog_render_callback',
 			)

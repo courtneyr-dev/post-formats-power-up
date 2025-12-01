@@ -169,33 +169,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</ul>
 	</div>
 </div>
-
-<style>
-/* Basic styling for repair tool page - inline for simplicity */
-.pfpu-repair-summary.card {
-	padding: 20px;
-	background: #fff;
-	border: 1px solid #ccd0d4;
-	box-shadow: 0 1px 1px rgba(0,0,0,.04);
-	margin-top: 20px;
-}
-
-.pfpu-repair-summary table {
-	margin-top: 15px;
-}
-
-.pfpu-repair-summary th {
-	width: 200px;
-	font-weight: 600;
-}
-
-.pfpu-mismatches table {
-	margin-top: 15px;
-}
-
-.pfpu-mismatches code {
-	background: #f0f0f1;
-	padding: 2px 6px;
-	border-radius: 3px;
-}
-</style>

@@ -290,6 +290,6 @@ svn ci -m "Tagging version 1.1.0"
 
 **Submission URL:** https://wordpress.org/plugins/developers/add/
 
-**Plugin ZIP:** `/Users/crobertson/Downloads/postformats/post-formats-power-up/post-formats-for-block-themes-1.0.0.zip`
+**Plugin ZIP:** `/Users/crobertson/Downloads/postformats/post-formats-for-block-themes/post-formats-for-block-themes.zip`
 
 **Good luck with your submission!** 🚀

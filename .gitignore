@@ -47,9 +47,11 @@ composer.lock
 
 # Deployment
 *.zip
-.wordpress-org/
 dist/
 test-dist/
+
+# Note: .wordpress-org/ is tracked in git (for WordPress.org assets)
+# but excluded from plugin ZIP via .distignore
 
 # Environment
 .env

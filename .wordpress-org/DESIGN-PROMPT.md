@@ -240,18 +240,29 @@ Look at successful WordPress plugins for inspiration, but ensure unique branding
 - Sans-serif typography (Inter, Poppins)
 - Geometric, structured layouts
 
-**Post Format Icons:**
-Think of each format as a distinct content type with its own icon:
-- Quote: "" quotation marks or chat bubble with quote
-- Gallery: 2×2 or 3×3 grid of squares
-- Video: Play button or film icon
-- Audio: Waveform or microphone
-- Chat: Overlapping speech bubbles
-- Link: Chain links or arrow
-- Image: Picture frame or mountain landscape
-- Status: Short text or bird (Twitter-style)
-- Aside: Arrow pointing right or small note
-- Standard: Document or page icon
+**Post Format Icons - Use Official WordPress Dashicons:**
+
+**IMPORTANT:** Use these exact Dashicons from https://developer.wordpress.org/resource/dashicons/
+
+Each format has an official Dashicon - use these ONLY:
+
+1. **Quote** → `dashicons-format-quote` (quotation marks icon)
+2. **Gallery** → `dashicons-format-gallery` (grid of squares icon)
+3. **Video** → `dashicons-format-video` (play button with frame icon)
+4. **Audio** → `dashicons-format-audio` (headphones/music note icon)
+5. **Chat** → `dashicons-format-chat` (speech bubbles icon)
+6. **Link** → `dashicons-admin-links` (chain link icon)
+7. **Image** → `dashicons-format-image` (picture frame with mountain icon)
+8. **Status** → `dashicons-format-status` (star icon)
+9. **Aside** → `dashicons-format-aside` (quotation mark in box icon)
+10. **Standard** → `dashicons-format-standard` (document/post icon)
+
+**How to use Dashicons:**
+- If using Figma: Install the "WordPress Icons" or "Dashicons" plugin
+- If using design software: Download SVG from https://github.com/WordPress/dashicons
+- If using AI tools: Reference the Dashicons page and describe the exact icon
+- DO NOT create custom icons - use the official Dashicons as-is
+- DO NOT use generic icons from other icon sets
 
 ---
 

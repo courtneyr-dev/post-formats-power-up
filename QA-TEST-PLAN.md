@@ -1307,44 +1307,62 @@ Expected:
 
 **Test Title:** "Project Kickoff Discussion"
 
+**IMPORTANT:** Slack export format uses **2 spaces** between name and timestamp!
+
 **Copy this transcript:**
 ```
-@sarah [9:30 AM]: Hey team! 👋 Ready to kick off the new website project?
+sarah  9:30 AM
+Hey team! 👋 Ready to kick off the new website project?
 
-@mike [9:31 AM]: Absolutely! I've been reviewing the requirements doc.
+mike  9:31 AM
+Absolutely! I've been reviewing the requirements doc.
 
-@sarah [9:32 AM]: Great! Let's start with the tech stack discussion.
+sarah  9:32 AM
+Great! Let's start with the tech stack discussion.
 What are everyone's thoughts on using React vs Vue?
 
-@jessica [9:33 AM]: I'm leaning towards React. Better ecosystem and
+jessica  9:33 AM
+I'm leaning towards React. Better ecosystem and
 more developers on the team are familiar with it.
 
-@mike [9:34 AM]: +1 for React. We also have those reusable components
+mike  9:34 AM
++1 for React. We also have those reusable components
 from the last project.
 
-@sarah [9:35 AM]: Sounds good! React it is. 🎉
+sarah  9:35 AM
+Sounds good! React it is. 🎉
 Next up: backend architecture...
 
-@jessica [9:36 AM]: I was thinking Node.js with Express for the API layer.
+jessica  9:36 AM
+I was thinking Node.js with Express for the API layer.
 
-@mike [9:37 AM]: Works for me. Should we use PostgreSQL or MongoDB?
+mike  9:37 AM
+Works for me. Should we use PostgreSQL or MongoDB?
 
-@sarah [9:38 AM]: Let's go with PostgreSQL for better data integrity.
+sarah  9:38 AM
+Let's go with PostgreSQL for better data integrity.
 
-@jessica [9:39 AM]: Perfect. I'll set up the repo and initial scaffolding today.
+jessica  9:39 AM
+Perfect. I'll set up the repo and initial scaffolding today.
 
-@mike [9:40 AM]: I can start on the database schema design.
+mike  9:40 AM
+I can start on the database schema design.
 
-@sarah [9:41 AM]: Excellent! Let's sync again tomorrow morning.
+sarah  9:41 AM
+Excellent! Let's sync again tomorrow morning.
 Great start, team! 💪
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **Slack**
+3. Set Source: **Slack** (or Auto - should detect correctly)
 4. Set Style: **Bubbles**
-5. Verify: Usernames with @ symbol, emojis render, timestamps show
+5. Verify: Usernames shown, emojis render, timestamps display, messages in bubbles
+
+**Common Issues:**
+- If parse fails, check there are **2 spaces** between name and time (not 1!)
+- Don't include @ symbols in the transcript (parser doesn't use them)
 
 ---
 
@@ -1354,54 +1372,75 @@ Great start, team! 💪
 
 **Copy this transcript:**
 ```
-DragonSlayer99 [8:15 PM]: @everyone Raid starts in 15 minutes!
+DragonSlayer99  8:15 PM
+@everyone Raid starts in 15 minutes!
 Make sure you're geared up.
 
-MagicMike#4521 [8:16 PM]: I'm ready! Got all my potions and buffs.
+MagicMike#4521  8:16 PM
+I'm ready! Got all my potions and buffs.
 
-HealerQueen [8:17 PM]: Tank check - who's main tanking tonight?
+HealerQueen  8:17 PM
+Tank check - who's main tanking tonight?
 
-DragonSlayer99 [8:18 PM]: I'll main tank. @IronWall can you off-tank?
+DragonSlayer99  8:18 PM
+I'll main tank. @IronWall can you off-tank?
 
-IronWall#7893 [8:19 PM]: 👍 On it!
+IronWall#7893  8:19 PM
+👍 On it!
 
-HealerQueen [8:20 PM]: Great. I'll focus heals on Dragon, but ping me
+HealerQueen  8:20 PM
+Great. I'll focus heals on Dragon, but ping me
 if off-tank needs emergency heals.
 
-MagicMike#4521 [8:21 PM]: What's the DPS priority for phase 1?
+MagicMike#4521  8:21 PM
+What's the DPS priority for phase 1?
 
-DragonSlayer99 [8:22 PM]: Focus fire on the adds first, then boss.
+DragonSlayer99  8:22 PM
+Focus fire on the adds first, then boss.
 Watch out for the AoE ground effects!
 
-Bowmaster [8:23 PM]: Got it. I'll call out AoE warnings on voice.
+Bowmaster  8:23 PM
+Got it. I'll call out AoE warnings on voice.
 
-HealerQueen [8:24 PM]: Remember - if you get the curse debuff,
+HealerQueen  8:24 PM
+Remember - if you get the curse debuff,
 run to the corner immediately!
 
-MagicMike#4521 [8:25 PM]: What's our wipe limit tonight?
+MagicMike#4521  8:25 PM
+What's our wipe limit tonight?
 
-DragonSlayer99 [8:26 PM]: Let's aim for a clear in 3 attempts.
+DragonSlayer99  8:26 PM
+Let's aim for a clear in 3 attempts.
 We've practiced this enough. 💪
 
-IronWall#7893 [8:27 PM]: Consumables check - everyone have
+IronWall#7893  8:27 PM
+Consumables check - everyone have
 feast buffs and flasks?
 
-Bowmaster [8:28 PM]: ✅ All set!
+Bowmaster  8:28 PM
+✅ All set!
 
-HealerQueen [8:28 PM]: ✅ Ready!
+HealerQueen  8:28 PM
+✅ Ready!
 
-MagicMike#4521 [8:29 PM]: ✅ Let's do this!
+MagicMike#4521  8:29 PM
+✅ Let's do this!
 
-DragonSlayer99 [8:30 PM]: Alright team, pulling in 60 seconds.
+DragonSlayer99  8:30 PM
+Alright team, pulling in 60 seconds.
 Good luck everyone! 🗡️🛡️
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **Discord**
+3. Set Source: **Discord** (or Auto)
 4. Set Style: **Bubbles**
-5. Verify: Discord usernames with # numbers, @mentions, emoji support, role colors
+5. Verify: Discord usernames display (with # if present), @mentions in messages, emojis render
+
+**Common Issues:**
+- Use **2 spaces** between name and timestamp
+- Keep @ symbols in message content (like @everyone), but not in usernames at start of line
 
 ---
 
@@ -1411,60 +1450,80 @@ Good luck everyone! 🗡️🛡️
 
 **Copy this transcript:**
 ```
-Jennifer Martinez [2:00 PM]: Good afternoon everyone.
+Jennifer Martinez  2:00 PM
+Good afternoon everyone.
 Let's begin the Q2 budget review.
 
-Robert Chen [2:01 PM]: Thanks for organizing this, Jennifer.
+Robert Chen  2:01 PM
+Thanks for organizing this, Jennifer.
 I've shared the budget spreadsheet in the Files tab.
 
-Jennifer Martinez [2:02 PM]: Perfect. Let's start with Marketing's numbers.
+Jennifer Martinez  2:02 PM
+Perfect. Let's start with Marketing's numbers.
 Sarah, can you walk us through your department's spending?
 
-Sarah Thompson [2:03 PM]: Of course. We spent $45K in Q2,
+Sarah Thompson  2:03 PM
+Of course. We spent $45K in Q2,
 which is 90% of our allocated budget.
 
-Sarah Thompson [2:04 PM]: The remaining 10% is reserved for
+Sarah Thompson  2:04 PM
+The remaining 10% is reserved for
 a campaign launching next month.
 
-Robert Chen [2:05 PM]: That's excellent budget management, Sarah.
+Robert Chen  2:05 PM
+That's excellent budget management, Sarah.
 How's the ROI looking?
 
-Sarah Thompson [2:06 PM]: We're seeing 3.2x ROI on digital campaigns
+Sarah Thompson  2:06 PM
+We're seeing 3.2x ROI on digital campaigns
 and 1.8x on traditional media.
 
-Michael Rodriguez [2:07 PM]: Those digital numbers are impressive.
+Michael Rodriguez  2:07 PM
+Those digital numbers are impressive.
 Can we reallocate more budget there for Q3?
 
-Jennifer Martinez [2:08 PM]: Good question. Sarah, what would you
+Jennifer Martinez  2:08 PM
+Good question. Sarah, what would you
 do with an additional $20K in digital budget?
 
-Sarah Thompson [2:09 PM]: I'd invest in expanded social media advertising
+Sarah Thompson  2:09 PM
+I'd invest in expanded social media advertising
 and influencer partnerships. Both channels are performing well.
 
-Robert Chen [2:10 PM]: From a finance perspective, we have some flexibility.
+Robert Chen  2:10 PM
+From a finance perspective, we have some flexibility.
 IT came in under budget this quarter.
 
-Michael Rodriguez [2:11 PM]: Confirmed. We're $30K under budget due to
+Michael Rodriguez  2:11 PM
+Confirmed. We're $30K under budget due to
 delayed server upgrades.
 
-Jennifer Martinez [2:12 PM]: Excellent. Let's provisionally approve
+Jennifer Martinez  2:12 PM
+Excellent. Let's provisionally approve
 $20K additional for Marketing digital, pending exec approval.
 
-Sarah Thompson [2:13 PM]: Thank you! I'll prepare a detailed proposal
+Sarah Thompson  2:13 PM
+Thank you! I'll prepare a detailed proposal
 for the exec team.
 
-Jennifer Martinez [2:14 PM]: Great work, everyone. Let's move to
+Jennifer Martinez  2:14 PM
+Great work, everyone. Let's move to
 Operations next. Michael?
 
-Michael Rodriguez [2:15 PM]: Operations spent $78K of our $80K budget...
+Michael Rodriguez  2:15 PM
+Operations spent $78K of our $80K budget...
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **Microsoft Teams**
+3. Set Source: **Microsoft Teams** (or Auto)
 4. Set Style: **Timeline**
-5. Verify: Professional formatting, full names, timestamp formatting, business context
+5. Verify: Professional formatting, full names display, timestamps formatted properly
+
+**Common Issues:**
+- Use **2 spaces** between name and timestamp
+- Teams uses same format as Slack/Discord exports
 
 ---
 
@@ -1472,61 +1531,64 @@ Michael Rodriguez [2:15 PM]: Operations spent $78K of our $80K budget...
 
 **Test Title:** "Weekend Trip Planning"
 
+**IMPORTANT:** WhatsApp uses `[Date, Time] Name: Message` format
+
 **Copy this transcript:**
 ```
-Mom [10:23 AM]: Good morning! 🌞 Has everyone thought about
-the lake house trip next weekend?
+[01/16/2024, 10:23:00] Mom: Good morning! 🌞 Has everyone thought about the lake house trip next weekend?
 
-Dad [10:25 AM]: I'm in! Should we leave Friday evening or Saturday morning?
+[01/16/2024, 10:25:00] Dad: I'm in! Should we leave Friday evening or Saturday morning?
 
-Jake [10:27 AM]: friday evening!! less traffic 🚗
+[01/16/2024, 10:27:00] Jake: friday evening!! less traffic 🚗
 
-Emma [10:28 AM]: I vote Saturday morning. I have a work thing Friday night 😕
+[01/16/2024, 10:28:00] Emma: I vote Saturday morning. I have a work thing Friday night 😕
 
-Mom [10:30 AM]: Let's do Saturday morning then. 8 AM departure?
+[01/16/2024, 10:30:00] Mom: Let's do Saturday morning then. 8 AM departure?
 
-Jake [10:31 AM]: 8am?? thats sooo early 😴
+[01/16/2024, 10:31:00] Jake: 8am?? thats sooo early 😴
 
-Dad [10:32 AM]: The early bird gets the best fishing spot! 🎣
+[01/16/2024, 10:32:00] Dad: The early bird gets the best fishing spot! 🎣
 
-Emma [10:33 AM]: 8 AM works for me. I'll bring the cooler.
+[01/16/2024, 10:33:00] Emma: 8 AM works for me. I'll bring the cooler.
 
-Mom [10:35 AM]: Perfect! I'll make sandwiches and snacks for the drive.
+[01/16/2024, 10:35:00] Mom: Perfect! I'll make sandwiches and snacks for the drive.
 
-Jake [10:36 AM]: can we stop at that donut place on the way???  🍩🍩🍩
+[01/16/2024, 10:36:00] Jake: can we stop at that donut place on the way??? 🍩🍩🍩
 
-Dad [10:37 AM]: Ha! Sure thing, kiddo.
+[01/16/2024, 10:37:00] Dad: Ha! Sure thing, kiddo.
 
-Emma [10:39 AM]: What about groceries for the weekend?
-Should we shop before leaving or stop on the way?
+[01/16/2024, 10:39:00] Emma: What about groceries for the weekend? Should we shop before leaving or stop on the way?
 
-Mom [10:41 AM]: I'll do a grocery run Friday. Send me your requests!
+[01/16/2024, 10:41:00] Mom: I'll do a grocery run Friday. Send me your requests!
 
-Jake [10:42 AM]: PIZZA ROLLS!!! and chips and cookies and...
+[01/16/2024, 10:42:00] Jake: PIZZA ROLLS!!! and chips and cookies and...
 
-Emma [10:43 AM]: Jake 😂 How about some actual food too?
+[01/16/2024, 10:43:00] Emma: Jake 😂 How about some actual food too?
 
-Emma [10:44 AM]: I'd like stuff for salad and maybe chicken for the grill?
+[01/16/2024, 10:44:00] Emma: I'd like stuff for salad and maybe chicken for the grill?
 
-Dad [10:45 AM]: I'll handle the meat - burgers, hot dogs, steaks.
-Everyone good with that?
+[01/16/2024, 10:45:00] Dad: I'll handle the meat - burgers, hot dogs, steaks. Everyone good with that?
 
-Mom [10:47 AM]: Sounds good! Don't forget marshmallows for s'mores! 🔥
+[01/16/2024, 10:47:00] Mom: Sounds good! Don't forget marshmallows for s'mores! 🔥
 
-Emma [10:48 AM]: YES! S'mores are mandatory.
+[01/16/2024, 10:48:00] Emma: YES! S'mores are mandatory.
 
-Jake [10:49 AM]: best weekend ever incoming 🙌
+[01/16/2024, 10:49:00] Jake: best weekend ever incoming 🙌
 
-Dad [10:50 AM]: Don't forget to pack sunscreen everyone.
-It's supposed to be sunny all weekend. ☀️
+[01/16/2024, 10:50:00] Dad: Don't forget to pack sunscreen everyone. It's supposed to be sunny all weekend. ☀️
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **WhatsApp**
+3. Set Source: **WhatsApp** (or Auto - should detect from brackets)
 4. Set Style: **Bubbles**
-5. Verify: Casual tone, emojis, informal punctuation/caps, mobile-style formatting
+5. Verify: WhatsApp export format detected, emojis render, casual formatting
+
+**Format Notes:**
+- WhatsApp exports use: `[DD/MM/YYYY, HH:MM:SS] Name: Message`
+- Each message is on one line (multi-line messages continue same line)
+- This is the actual export format from WhatsApp mobile app
 
 ---
 
@@ -1536,62 +1598,83 @@ It's supposed to be sunny all weekend. ☀️
 
 **Copy this transcript:**
 ```
-Alex_Photos [11:15]: Hey everyone! Just got back from Iceland 🇮🇸
+Alex_Photos  11:15 AM
+Hey everyone! Just got back from Iceland 🇮🇸
 and wanted to share some lessons learned.
 
-Marina_Wanderlust [11:17]: Ooh exciting! How was the weather?
+Marina_Wanderlust  11:17 AM
+Ooh exciting! How was the weather?
 
-Alex_Photos [11:18]: Cold and unpredictable! The key is bringing
+Alex_Photos  11:18 AM
+Cold and unpredictable! The key is bringing
 LOTS of lens cloths. Constant rain/mist on the lens.
 
-Chen_Travels [11:20]: Great tip! What camera body did you use?
+Chen_Travels  11:20 AM
+Great tip! What camera body did you use?
 
-Alex_Photos [11:21]: Sony A7IV. The weather sealing really proved
+Alex_Photos  11:21 AM
+Sony A7IV. The weather sealing really proved
 its worth this trip.
 
-Marina_Wanderlust [11:23]: Did you get any good Northern Lights shots?
+Marina_Wanderlust  11:23 AM
+Did you get any good Northern Lights shots?
 
-Alex_Photos [11:25]: Yes! Best tips for aurora:
+Alex_Photos  11:25 AM
+Yes! Best tips for aurora:
 - ISO 3200-6400
 - f/1.4-2.8 (widest aperture possible)
 - 10-25 second exposures
 - Manual focus set to infinity
 
-Chen_Travels [11:27]: Thanks for the settings! What about
+Chen_Travels  11:27 AM
+Thanks for the settings! What about
 composition advice?
 
-Alex_Photos [11:29]: Include foreground interest - waterfalls,
+Alex_Photos  11:29 AM
+Include foreground interest - waterfalls,
 mountains, or interesting rock formations.
 Makes the aurora photos more dynamic.
 
-Priya_Shoots [11:31]: How'd you handle the cold temps for long exposures?
+Priya_Shoots  11:31 AM
+How'd you handle the cold temps for long exposures?
 
-Alex_Photos [11:33]: Brought extra batteries! Cold drains them fast.
+Alex_Photos  11:33 AM
+Brought extra batteries! Cold drains them fast.
 Keep spares in an inside pocket to stay warm.
 
-Marina_Wanderlust [11:35]: What time of night is best for aurora?
+Marina_Wanderlust  11:35 AM
+What time of night is best for aurora?
 
-Alex_Photos [11:37]: 10 PM to 2 AM was peak time.
+Alex_Photos  11:37 AM
+10 PM to 2 AM was peak time.
 But they can appear anytime after dark.
 
-Chen_Travels [11:39]: Any photo editing recommendations for aurora shots?
+Chen_Travels  11:39 AM
+Any photo editing recommendations for aurora shots?
 
-Alex_Photos [11:41]: Lightroom is great. Boost vibrance (not saturation),
+Alex_Photos  11:41 AM
+Lightroom is great. Boost vibrance (not saturation),
 clarity around 20-30%, and careful with noise reduction.
 
-Priya_Shoots [11:43]: This is so helpful! Making me want to book
+Priya_Shoots  11:43 AM
+This is so helpful! Making me want to book
 a trip to Iceland now! 📸
 
-Alex_Photos [11:45]: Do it! September-March is prime aurora season.
+Alex_Photos  11:45 AM
+Do it! September-March is prime aurora season.
 Happy to share more tips anytime! 🌌
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **Telegram**
+3. Set Source: **Telegram** (or Auto)
 4. Set Style: **IRC**
-5. Verify: Underscore usernames, link styling, bullet points, emojis
+5. Verify: Underscore usernames display, bullet points preserved, emojis render
+
+**Common Issues:**
+- Use **2 spaces** between name and timestamp
+- Telegram uses same format as Slack/Discord
 
 ---
 
@@ -1601,50 +1684,67 @@ Happy to share more tips anytime! 🌌
 
 **Copy this transcript:**
 ```
-Alice [14:22]: Signal call in 5 minutes for the security audit review?
+Alice  2:22 PM
+Signal call in 5 minutes for the security audit review?
 
-Bob [14:23]: Yes, I'm ready. Just finishing up some notes.
+Bob  2:23 PM
+Yes, I'm ready. Just finishing up some notes.
 
-Alice [14:24]: Perfect. I've got the vulnerability report open.
+Alice  2:24 PM
+Perfect. I've got the vulnerability report open.
 
-Bob [14:27]: Before we start - did you see the critical finding
+Bob  2:27 PM
+Before we start - did you see the critical finding
 in section 3.2?
 
-Alice [14:28]: The SQL injection vulnerability? Yes, priority one fix.
+Alice  2:28 PM
+The SQL injection vulnerability? Yes, priority one fix.
 
-Bob [14:29]: Agreed. I think we can patch that today if we pair on it.
+Bob  2:29 PM
+Agreed. I think we can patch that today if we pair on it.
 
-Alice [14:30]: Good plan. Let's discuss severity ratings for
+Alice  2:30 PM
+Good plan. Let's discuss severity ratings for
 the other findings on the call.
 
-Bob [14:31]: Sounds good. Starting the call now.
+Bob  2:31 PM
+Sounds good. Starting the call now.
 
-[Call duration: 47:32]
-
-Bob [15:19]: Great discussion. To summarize:
+Alice  3:19 PM
+Great discussion. To summarize:
 - SQL injection: Critical - fix today
 - XSS vulnerability: High - fix this week
 - CSRF issue: Medium - fix next sprint
 - Information disclosure: Low - backlog
 
-Alice [15:21]: Perfect summary. I'll create the tickets and
+Bob  3:21 PM
+Perfect summary. I'll create the tickets and
 assign priorities.
 
-Bob [15:22]: I'll start on the SQL injection patch right after this.
+Alice  3:22 PM
+I'll start on the SQL injection patch right after this.
 
-Alice [15:24]: Excellent. Let me know if you need a code review later.
+Bob  3:24 PM
+Excellent. Let me know if you need a code review later.
 
-Bob [15:25]: Will do. Should have something ready in 2-3 hours.
+Alice  3:25 PM
+Will do. Should have something ready in 2-3 hours.
 
-Alice [15:26]: 👍
+Bob  3:26 PM
+👍
 ```
 
 **Test Steps:**
 1. Create new post, select Chat format
 2. Paste transcript into Chat Log block
-3. Set Source: **Signal**
+3. Set Source: **Signal** (or Auto)
 4. Set Style: **Transcript**
-5. Verify: Clean formatting, call indicators, security context, minimal decoration
+5. Verify: Clean formatting, bullet points preserved, minimal styling
+
+**Common Issues:**
+- Use **2 spaces** between name and timestamp
+- Signal uses same format as Slack/Discord
+- Note: Call duration indicators are shown as messages, not special UI
 
 ---
 

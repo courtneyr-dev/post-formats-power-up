@@ -51,7 +51,7 @@ Each WordPress post format gets a professionally-designed block pattern optimize
 
 **No separate plugin needed!** Post Formats for Block Themes includes a full-featured Chat Log block for displaying conversation transcripts. Perfect for interviews, customer support examples, team discussions, or any dialogue format.
 
-Supported platforms: Slack, Discord, Microsoft Teams, WhatsApp, Telegram, Signal, and generic chat transcripts. Additional file format support: SRT subtitles, VTT captions, .docx documents, and .html files.
+Supported platforms: Slack, Discord, Microsoft Teams, WhatsApp, Telegram, Signal, and generic chat transcripts. Additional text format support: SRT subtitles, VTT captions, and plain text exports from any chat application.
 
 Chat Log features: automatic platform detection, avatar display, timestamp formatting (relative, absolute, time-only), multiple display styles (bubbles, IRC, transcript, timeline), thread collapsing, participant lists, device frames, full accessibility, and RTL support.
 

@@ -1955,132 +1955,69 @@ WEBVTT
 
 ---
 
-#### 📄 Demo 10: HTML File Import Test
+#### 📄 Demo 10: Plain Text from Other Sources
 
-**Test Title:** "HTML Chat Log Import"
+**Test Title:** "Copy-Paste from Various Sources"
 
-**Instructions:**
-1. Create a file named `test-chat.html` with this content:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Team Standup Notes</title>
-</head>
-<body>
-    <h1>Daily Standup - January 16, 2024</h1>
-
-    <div class="message">
-        <span class="user">Tom Johnson</span>
-        <span class="time">9:00 AM</span>
-        <p>Yesterday: Completed the user authentication module</p>
-        <p>Today: Working on the dashboard UI</p>
-        <p>Blockers: None</p>
-    </div>
-
-    <div class="message">
-        <span class="user">Lisa Chen</span>
-        <span class="time">9:02 AM</span>
-        <p>Yesterday: Fixed 8 bugs from QA testing</p>
-        <p>Today: Starting the API documentation</p>
-        <p>Blockers: Need design assets for new feature</p>
-    </div>
-
-    <div class="message">
-        <span class="user">Mark Rodriguez</span>
-        <span class="time">9:04 AM</span>
-        <p>Yesterday: Database schema refactoring</p>
-        <p>Today: Performance optimization sprint</p>
-        <p>Blockers: Waiting on server access from DevOps</p>
-    </div>
-
-    <div class="message">
-        <span class="user">Sarah Williams</span>
-        <span class="time">9:06 AM</span>
-        <p>Yesterday: User research interviews</p>
-        <p>Today: Compiling insights report</p>
-        <p>Blockers: None</p>
-    </div>
-</body>
-</html>
-```
-
-2. Save file and import into Chat Log block
-3. Verify: HTML structure preserved, classes maintained, formatting intact
-
----
-
-#### 📝 Demo 11: DOCX File Import Test
-
-**Test Title:** "Word Document Chat Transcript Import"
+**IMPORTANT:** Chat Log block parses TEXT only, not file formats. Copy and paste text content.
 
 **Instructions:**
-1. Create a Word document named `meeting-notes.docx`
-2. Format with this content (use actual Word formatting):
 
+You can copy text from any source and paste it into the Chat Log block. Here are examples:
+
+**From a Word Document (.docx):**
+1. Open your Word document with chat transcript
+2. Select all text (Cmd/Ctrl + A)
+3. Copy (Cmd/Ctrl + C)
+4. Paste into Chat Log block
+5. Format must match one of the supported patterns (Name  HH:MM AM/PM with 2 spaces)
+
+**From an HTML file:**
+1. Open HTML file in browser or text editor
+2. Copy the text content (not the HTML tags)
+3. Paste into Chat Log block
+4. Ensure format matches parser expectations
+
+**From a PDF:**
+1. Open PDF with chat transcript
+2. Select and copy text
+3. Paste into Chat Log block
+4. Clean up any formatting issues from PDF export
+
+**From Excel/Google Sheets:**
+1. Copy cells containing username, timestamp, message
+2. Paste into text editor
+3. Format as: `Name  HH:MM AM` (2 spaces) then message on next line
+4. Copy formatted text to Chat Log block
+
+**Test Example - Plain Text Format:**
 ```
-MEETING TRANSCRIPT
-Sales Team Weekly Sync
-Date: January 16, 2024
+Tom Johnson  9:00 AM
+Yesterday: Completed the user authentication module
+Today: Working on the dashboard UI
+Blockers: None
 
----
+Lisa Chen  9:02 AM
+Yesterday: Fixed 8 bugs from QA testing
+Today: Starting the API documentation
+Blockers: Need design assets for new feature
 
-Emily Parker [10:00 AM]:
-Good morning team! Let's review last week's numbers.
+Mark Rodriguez  9:04 AM
+Yesterday: Database schema refactoring
+Today: Performance optimization sprint
+Blockers: Waiting on server access from DevOps
 
-James Lee [10:01 AM]:
-Morning! I closed 3 new deals worth $45K total.
-
-Emily Parker [10:02 AM]:
-Fantastic work, James! That puts us at 85% of quarterly quota.
-
-Maria Garcia [10:03 AM]:
-I have 2 deals in final stages, both should close this week.
-Combined value of $30K.
-
-Emily Parker [10:05 AM]:
-Excellent! That would put us over quota. Anyone have concerns or blockers?
-
-David Kim [10:06 AM]:
-One of my prospects is asking about enterprise features.
-Can we schedule a technical deep dive?
-
-Emily Parker [10:07 AM]:
-Absolutely. I'll connect you with the solutions team.
-Send me the client details after this meeting.
-
-David Kim [10:08 AM]:
-Will do, thanks!
-
-Maria Garcia [10:09 AM]:
-Quick question - what's the discount approval threshold for
-contracts over $50K?
-
-Emily Parker [10:10 AM]:
-Up to 15% is auto-approved. Anything above needs regional manager sign-off.
-
-James Lee [10:11 AM]:
-Good to know! I have a prospect asking for 20% off.
-
-Emily Parker [10:12 AM]:
-Send me the details and business justification.
-I'll escalate to regional for approval.
-
-Emily Parker [10:13 AM]:
-Great work everyone! Let's keep this momentum going.
-Same time next week?
-
-All: 👍
-
----
-
-END OF TRANSCRIPT
+Sarah Williams  9:06 AM
+Yesterday: User research interviews
+Today: Compiling insights report
+Blockers: None
 ```
 
-3. Save as .docx file
-4. Import into Chat Log block via file upload
-5. Verify: Formatting converted, line breaks maintained, structure preserved
+**Common Issues:**
+- PDF exports may have line break issues - clean up in text editor first
+- HTML must be converted to plain text - don't paste HTML tags
+- Word documents: paste TEXT only, not rich formatting
+- Excel: may need manual formatting to match parser patterns
 
 ---
 

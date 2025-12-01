@@ -1,4 +1,4 @@
-# Post Formats Power-Up - Complete Testing Documentation
+# Post Formats for Block Themes - Complete Testing Documentation
 
 ## Overview
 

@@ -5,7 +5,7 @@
  * Quotation or citation. Starts with a quote block.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

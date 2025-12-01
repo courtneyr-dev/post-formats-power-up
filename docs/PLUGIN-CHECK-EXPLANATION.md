@@ -80,7 +80,7 @@ composer install --no-dev  # Install production dependencies only
 
 ### **Step 2: Distribution Creation**
 ```bash
-rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
 ```
 
 The `.distignore` file tells rsync to **exclude** these files:
@@ -100,7 +100,7 @@ The `.distignore` file tells rsync to **exclude** these files:
 
 ### **Step 3: Clean Distribution**
 Only production files are included:
-- ✅ `post-formats-power-up.php` - Main plugin file
+- ✅ `post-formats-for-block-themes.php` - Main plugin file
 - ✅ `readme.txt` - WordPress.org readme
 - ✅ `/includes/` - PHP classes
 - ✅ `/templates/` - PHP templates
@@ -118,10 +118,10 @@ You can verify the distribution will be clean by creating a test build:
 ```bash
 # Create distribution directory
 mkdir -p dist
-rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
 
 # Check what files are included
-ls -la dist/post-formats-power-up/
+ls -la dist/post-formats-for-block-themes/
 
 # You should NOT see:
 # - bin/ directory
@@ -176,7 +176,7 @@ rm -rf dist
 ```yaml
 - name: Create distribution archive
   run: |
-    rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+    rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
     # Result: Clean distribution, no development files
 ```
 
@@ -206,17 +206,17 @@ If you want Plugin Check to pass on your local development installation, you can
 
 ```bash
 # Backup first!
-cp -r ~/Downloads/postformats/post-formats-power-up ~/Downloads/postformats/post-formats-power-up-backup
+cp -r ~/Downloads/postformats/post-formats-for-block-themes ~/Downloads/postformats/post-formats-for-block-themes-backup
 
 # Remove development files
-cd ~/Downloads/postformats/post-formats-power-up
+cd ~/Downloads/postformats/post-formats-for-block-themes
 rm -rf bin/ tests/ docs/ .env .env.example .gitignore phpunit.xml.dist playwright.config.js
 
 # Run Plugin Check again
 # (But you'll lose your development tools!)
 
 # Restore from backup
-cp -r ~/Downloads/postformats/post-formats-power-up-backup/* ~/Downloads/postformats/post-formats-power-up/
+cp -r ~/Downloads/postformats/post-formats-for-block-themes-backup/* ~/Downloads/postformats/post-formats-for-block-themes/
 ```
 
 **Not recommended** - You need these files for development!

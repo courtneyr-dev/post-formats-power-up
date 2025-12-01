@@ -41,9 +41,9 @@ jobs:
       - name: Create distribution archive
         run: |
           mkdir -p dist
-          rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+          rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
           cd dist
-          zip -r ../post-formats-power-up.zip post-formats-power-up/
+          zip -r ../post-formats-for-block-themes.zip post-formats-for-block-themes/
 
       - name: WordPress Plugin Deploy
         id: deploy
@@ -53,7 +53,7 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: post-formats-power-up
+          SLUG: post-formats-for-block-themes
           VERSION: ${{ github.event.release.tag_name }}
 
       - name: Upload release asset
@@ -62,6 +62,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./post-formats-power-up.zip
-          asset_name: post-formats-power-up-${{ github.event.release.tag_name }}.zip
+          asset_path: ./post-formats-for-block-themes.zip
+          asset_name: post-formats-for-block-themes-${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip

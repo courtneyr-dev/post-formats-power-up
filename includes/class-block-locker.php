@@ -5,7 +5,7 @@
  * Provides utilities for working with locked blocks in post format patterns.
  * Block locking is embedded directly in pattern content via block attributes.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  *
  * Accessibility Note:
@@ -26,13 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Block_Locker {
+class PFBT_Block_Locker {
 
 	/**
 	 * Single instance of the class
 	 *
 	 * @since 1.0.0
-	 * @var PFPU_Block_Locker|null
+	 * @var PFBT_Block_Locker|null
 	 */
 	private static $instance = null;
 
@@ -40,7 +40,7 @@ class PFPU_Block_Locker {
 	 * Get singleton instance
 	 *
 	 * @since 1.0.0
-	 * @return PFPU_Block_Locker
+	 * @return PFBT_Block_Locker
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -217,7 +217,7 @@ class PFPU_Block_Locker {
 	 * @return string Translated description.
 	 */
 	public static function get_lock_description( $format ) {
-		$format_data = PFPU_Format_Registry::get_format( $format );
+		$format_data = PFBT_Format_Registry::get_format( $format );
 
 		if ( ! $format_data ) {
 			return '';
@@ -225,7 +225,7 @@ class PFPU_Block_Locker {
 
 		return sprintf(
 			/* translators: %s: Format name */
-			__( 'The first block in %s format is locked to maintain format consistency. You can add additional blocks below.', 'post-formats-power-up' ),
+			__( 'The first block in %s format is locked to maintain format consistency. You can add additional blocks below.', 'post-formats-for-block-themes' ),
 			$format_data['name']
 		);
 	}

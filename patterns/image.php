@@ -5,7 +5,7 @@
  * Single image post. Starts with an image block.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

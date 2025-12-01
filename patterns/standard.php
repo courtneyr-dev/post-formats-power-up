@@ -5,7 +5,7 @@
  * Default post format with no special first block requirement.
  * Starts with an empty canvas for traditional blog posts.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 

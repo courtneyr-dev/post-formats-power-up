@@ -9,7 +9,7 @@
  * Author:            Courtney Robertson
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       post-formats-power-up
+ * Text Domain:       post-formats-for-block-themes
  * Domain Path:       /languages
  *
  * @package ChatLog
@@ -83,7 +83,7 @@ if ( ! function_exists( 'chatlog_register_block' ) ) {
 		// Set script translations
 		wp_set_script_translations(
 			'chatlog-block-editor',
-			'post-formats-power-up',
+			'post-formats-for-block-themes',
 			CHATLOG_PLUGIN_DIR . 'languages'
 		);
 
@@ -444,7 +444,7 @@ if ( ! function_exists( 'chatlog_replace_emoji' ) ) {
 if ( ! function_exists( 'chatlog_parse_transcript' ) ) {
 	function chatlog_parse_transcript( $raw_transcript, $source = 'auto' ) {
 		if ( empty( $raw_transcript ) ) {
-			return new WP_Error( 'empty_transcript', __( 'No transcript provided', 'post-formats-power-up' ) );
+			return new WP_Error( 'empty_transcript', __( 'No transcript provided', 'post-formats-for-block-themes' ) );
 		}
 
 		$messages        = array();
@@ -678,7 +678,7 @@ if ( ! function_exists( 'chatlog_parse_transcript' ) ) {
 		}
 
 		if ( empty( $messages ) ) {
-			return new WP_Error( 'parse_failed', __( 'Could not parse transcript. Please check the format.', 'post-formats-power-up' ) );
+			return new WP_Error( 'parse_failed', __( 'Could not parse transcript. Please check the format.', 'post-formats-for-block-themes' ) );
 		}
 
 		return $messages;
@@ -757,7 +757,7 @@ if ( ! function_exists( 'chatlog_render_messages' ) ) {
 		$output .= sprintf(
 			'<div class="chatlog chatlog--%s" role="log" aria-label="%s">',
 			esc_attr( $options['display_style'] ),
-			esc_attr__( 'Chat conversation', 'post-formats-power-up' )
+			esc_attr__( 'Chat conversation', 'post-formats-for-block-themes' )
 		);
 
 		if ( $options['show_participant_list'] ) {
@@ -765,7 +765,7 @@ if ( ! function_exists( 'chatlog_render_messages' ) ) {
 			$output      .= '<details class="chatlog-participants">';
 			$output      .= sprintf(
 				'<summary>%s (%d)</summary>',
-				esc_html__( 'Participants', 'post-formats-power-up' ),
+				esc_html__( 'Participants', 'post-formats-for-block-themes' ),
 				count( $participants )
 			);
 			$output      .= '<ul class="chatlog-participants-list">';
@@ -816,7 +816,7 @@ if ( ! function_exists( 'chatlog_render_messages' ) ) {
 			}
 
 			if ( ! empty( $message['is_thread'] ) ) {
-				$output .= '<span class="chatlog-thread-indicator">' . esc_html__( '(in thread)', 'post-formats-power-up' ) . '</span>';
+				$output .= '<span class="chatlog-thread-indicator">' . esc_html__( '(in thread)', 'post-formats-for-block-themes' ) . '</span>';
 			}
 
 			$output .= '</div></div>';
@@ -1016,7 +1016,7 @@ function chatlog_render_callback( $attributes, $content, $block ) {
 	if ( empty( $raw_transcript ) ) {
 		return sprintf(
 			'<div class="chatlog-placeholder">%s</div>',
-			esc_html__( 'Paste your chat transcript to get started.', 'post-formats-power-up' )
+			esc_html__( 'Paste your chat transcript to get started.', 'post-formats-for-block-themes' )
 		);
 	}
 
@@ -1027,7 +1027,7 @@ function chatlog_render_callback( $attributes, $content, $block ) {
 	if ( is_wp_error( $messages ) ) {
 		return sprintf(
 			'<div class="chatlog-error"><p>%s</p><p>%s</p></div>',
-			esc_html__( 'Error parsing chat transcript:', 'post-formats-power-up' ),
+			esc_html__( 'Error parsing chat transcript:', 'post-formats-for-block-themes' ),
 			esc_html( $messages->get_error_message() )
 		);
 	}

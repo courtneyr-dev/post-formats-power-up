@@ -8,7 +8,7 @@
  * Note: Requires the Chat Log plugin to be active.
  * If plugin is inactive, block will show as "missing block" (standard WP behavior).
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

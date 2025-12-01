@@ -5,7 +5,7 @@
  * Tests that repair tool scanning and fixing completes within
  * acceptable time limits for various database sizes.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  */
 
 class Test_Repair_Tool_Performance extends WP_UnitTestCase {
@@ -43,7 +43,7 @@ class Test_Repair_Tool_Performance extends WP_UnitTestCase {
 				$first_block = reset( $blocks );
 
 				// Detect format
-				PFPU_Format_Registry::get_format_by_block(
+				PFBT_Format_Registry::get_format_by_block(
 					$first_block['blockName'] ?? '',
 					$first_block['attrs'] ?? array()
 				);
@@ -91,7 +91,7 @@ class Test_Repair_Tool_Performance extends WP_UnitTestCase {
 
 			if ( ! empty( $blocks ) ) {
 				$first_block = reset( $blocks );
-				PFPU_Format_Registry::get_format_by_block(
+				PFBT_Format_Registry::get_format_by_block(
 					$first_block['blockName'] ?? '',
 					$first_block['attrs'] ?? array()
 				);
@@ -122,7 +122,7 @@ class Test_Repair_Tool_Performance extends WP_UnitTestCase {
 
 		// Repair (set to correct format)
 		set_post_format( $post_id, 'gallery' );
-		update_post_meta( $post_id, '_pfpu_format_repaired', current_time( 'mysql' ) );
+		update_post_meta( $post_id, '_pfbt_format_repaired', current_time( 'mysql' ) );
 
 		$duration = ( microtime( true ) - $start ) * 1000;
 
@@ -159,7 +159,7 @@ class Test_Repair_Tool_Performance extends WP_UnitTestCase {
 
 			if ( ! empty( $blocks ) ) {
 				foreach ( $blocks as $block ) {
-					PFPU_Format_Registry::get_format_by_block(
+					PFBT_Format_Registry::get_format_by_block(
 						$block['blockName'] ?? '',
 						$block['attrs'] ?? array()
 					);

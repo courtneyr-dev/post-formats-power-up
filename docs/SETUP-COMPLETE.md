@@ -2,7 +2,7 @@
 
 ## 🎉 **All Testing Infrastructure Successfully Implemented!**
 
-Your Post Formats Power-Up plugin now has **enterprise-grade** testing and deployment infrastructure matching professional WordPress plugins like Yoast SEO, WooCommerce, and Advanced Custom Fields.
+Your Post Formats for Block Themes plugin now has **enterprise-grade** testing and deployment infrastructure matching professional WordPress plugins like Yoast SEO, WooCommerce, and Advanced Custom Fields.
 
 ---
 
@@ -297,7 +297,7 @@ open coverage-report/index.html
 To run the Playwright tests, update the WordPress admin password:
 
 ```bash
-cd ~/Downloads/postformats/post-formats-power-up
+cd ~/Downloads/postformats/post-formats-for-block-themes
 nano .env
 ```
 

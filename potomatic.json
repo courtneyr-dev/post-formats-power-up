@@ -1,13 +1,13 @@
 {
     "name": "Post Formats Power-Up",
-    "slug": "post-formats-power-up",
-    "domain": "post-formats-power-up",
+    "slug": "post-formats-for-block-themes",
+    "domain": "post-formats-for-block-themes",
     "version": "1.0.0",
     "author": "Courtney Robertson",
     "author_uri": "https://profiles.wordpress.org/courane01/",
     "license": "GPL v2 or later",
     "headers": {
-        "Report-Msgid-Bugs-To": "https://github.com/courane01/post-formats-power-up/issues",
+        "Report-Msgid-Bugs-To": "https://github.com/courane01/post-formats-for-block-themes/issues",
         "Last-Translator": "Courtney Robertson",
         "Language-Team": "Post Formats Power-Up"
     },

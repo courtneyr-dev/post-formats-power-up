@@ -1,4 +1,4 @@
-# Post Formats Power-Up
+# Post Formats for Block Themes
 
 A modern WordPress plugin that brings post format functionality to block themes with intelligent patterns, automatic detection, and an enhanced editor experience.
 
@@ -27,7 +27,7 @@ A modern WordPress plugin that brings post format functionality to block themes 
 ### From WordPress.org
 
 1. Go to Plugins → Add New in your WordPress admin
-2. Search for "Post Formats Power-Up"
+2. Search for "Post Formats for Block Themes"
 3. Install and activate
 
 ### Manual Installation
@@ -68,7 +68,7 @@ npm run lint:css
 ### File Structure
 
 ```
-post-formats-power-up/
+post-formats-for-block-themes/
 ├── includes/          # PHP classes
 ├── patterns/          # Block pattern definitions
 ├── src/              # JavaScript source files
@@ -170,9 +170,9 @@ GPL v2 or later - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- **Documentation**: [Plugin documentation](https://example.com/post-formats-power-up/docs/)
-- **WordPress.org**: [Support forums](https://wordpress.org/support/plugin/post-formats-power-up/)
-- **GitHub**: [Issue tracker](https://github.com/yourname/post-formats-power-up/issues)
+- **Documentation**: [Plugin documentation](https://wordpress.org/plugins/post-formats-for-block-themes/)
+- **WordPress.org**: [Support forums](https://wordpress.org/support/plugin/post-formats-for-block-themes/)
+- **GitHub**: [Issue tracker](https://github.com/courtneyr-dev/post-formats-for-block-themes/issues)
 
 ## Changelog
 

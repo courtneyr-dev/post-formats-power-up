@@ -4,7 +4,7 @@
  *
  * Tests the complete auto-detection workflow with WordPress.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  */
 
 class Test_Auto_Detection extends WP_UnitTestCase {
@@ -54,7 +54,7 @@ class Test_Auto_Detection extends WP_UnitTestCase {
 
 		// Manually set to standard format
 		set_post_format( $post_id, 'standard' );
-		update_post_meta( $post_id, '_pfpu_manual_format', '1' );
+		update_post_meta( $post_id, '_pfbt_manual_format', '1' );
 
 		// Trigger auto-detection
 		do_action( 'save_post', $post_id, get_post( $post_id ), true );

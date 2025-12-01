@@ -227,12 +227,12 @@ jobs:
       - name: Create distribution archive
         run: |
           mkdir -p dist
-          rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+          rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
           cd dist
-          zip -r post-formats-power-up.zip post-formats-power-up
+          zip -r post-formats-for-block-themes.zip post-formats-for-block-themes
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: post-formats-power-up-zip
-          path: dist/post-formats-power-up.zip
+          name: post-formats-for-block-themes-zip
+          path: dist/post-formats-for-block-themes.zip

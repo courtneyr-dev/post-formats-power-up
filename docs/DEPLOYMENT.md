@@ -1,4 +1,4 @@
-# Deployment Guide - Post Formats Power-Up
+# Deployment Guide - Post Formats for Block Themes
 
 ## Automated WordPress.org Deployment
 
@@ -12,7 +12,7 @@ This plugin uses GitHub Actions to automatically deploy to WordPress.org when yo
 
 - Plugin must be approved and listed on WordPress.org
 - You need WordPress.org SVN credentials
-- Plugin slug: `post-formats-power-up`
+- Plugin slug: `post-formats-for-block-themes`
 
 ### 2. GitHub Repository Secrets
 
@@ -38,7 +38,7 @@ SVN_PASSWORD=your-wordpress-org-password
 **Step 1: Prepare Release**
 
 1. Update version numbers in:
-   - `post-formats-power-up.php` (Plugin header)
+   - `post-formats-for-block-themes.php` (Plugin header)
    - `readme.txt` (Stable tag)
    - `package.json` (version)
 
@@ -98,9 +98,9 @@ composer i18n
 ```bash
 # Create clean distribution
 mkdir -p dist
-rsync -av --exclude-from='.distignore' . dist/post-formats-power-up/
+rsync -av --exclude-from='.distignore' . dist/post-formats-for-block-themes/
 cd dist
-zip -r ../post-formats-power-up.zip post-formats-power-up/
+zip -r ../post-formats-for-block-themes.zip post-formats-for-block-themes/
 cd ..
 ```
 
@@ -108,11 +108,11 @@ cd ..
 
 ```bash
 # Checkout SVN repository
-svn co https://plugins.svn.wordpress.org/post-formats-power-up svn-repo
+svn co https://plugins.svn.wordpress.org/post-formats-for-block-themes svn-repo
 cd svn-repo
 
 # Update trunk
-rsync -av --delete --exclude='.svn' ../dist/post-formats-power-up/ trunk/
+rsync -av --delete --exclude='.svn' ../dist/post-formats-for-block-themes/ trunk/
 
 # Add new files
 svn add --force trunk/*
@@ -155,7 +155,7 @@ Before creating a release, ensure:
 - [ ] No console errors in browser
 
 ### ✅ Version Updates
-- [ ] Version in `post-formats-power-up.php` header
+- [ ] Version in `post-formats-for-block-themes.php` header
 - [ ] `Stable tag` in `readme.txt`
 - [ ] Version in `package.json`
 - [ ] Changelog updated in `readme.txt`
@@ -197,7 +197,7 @@ git commit -m "Rollback to version 1.0.0"
 git push
 
 # Deploy readme update
-svn co https://plugins.svn.wordpress.org/post-formats-power-up/trunk
+svn co https://plugins.svn.wordpress.org/post-formats-for-block-themes/trunk
 cd trunk
 # Update readme.txt
 svn ci -m "Rollback to version 1.0.0"
@@ -236,7 +236,7 @@ svn ci -m "Rollback to version 1.0.0"
 
 1. Check `readme.txt` stable tag matches released version
 2. Wait 15-30 minutes for WordPress.org cache
-3. Force refresh: https://wordpress.org/plugins/post-formats-power-up/?clear_cache=1
+3. Force refresh: https://wordpress.org/plugins/post-formats-for-block-themes/?clear_cache=1
 
 ---
 
@@ -245,7 +245,7 @@ svn ci -m "Rollback to version 1.0.0"
 After successful deployment:
 
 ### ✅ Verify Deployment
-- [ ] Check WordPress.org plugin page: https://wordpress.org/plugins/post-formats-power-up/
+- [ ] Check WordPress.org plugin page: https://wordpress.org/plugins/post-formats-for-block-themes/
 - [ ] Verify version number displays correctly
 - [ ] Test "Download" button works
 - [ ] Check changelog displays properly

@@ -5,7 +5,7 @@
  * Short status update without title, limited to 280 characters (Twitter-style).
  * First block is locked. Character validation handled by JavaScript.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 

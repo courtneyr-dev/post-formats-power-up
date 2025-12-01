@@ -5,7 +5,7 @@
  * Admin tool for scanning and repairing post format assignments.
  * Provides a safe interface to detect and correct format mismatches.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  *
  * Security Implementation:
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Repair_Tool {
+class PFBT_Repair_Tool {
 
 	/**
 	 * Render the repair tool page
@@ -46,16 +46,16 @@ class PFPU_Repair_Tool {
 		// Check user capability.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die(
-				esc_html__( 'You do not have sufficient permissions to access this page.', 'post-formats-power-up' ),
-				esc_html__( 'Permission Denied', 'post-formats-power-up' ),
+				esc_html__( 'You do not have sufficient permissions to access this page.', 'post-formats-for-block-themes' ),
+				esc_html__( 'Permission Denied', 'post-formats-for-block-themes' ),
 				array( 'response' => 403 )
 			);
 		}
 
 		// Handle form submissions with nonce verification.
-		if ( isset( $_POST['pfpu_repair_action'] ) &&
-			isset( $_POST['pfpu_repair_nonce'] ) &&
-			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pfpu_repair_nonce'] ) ), 'pfpu_repair_action' ) ) {
+		if ( isset( $_POST['pfbt_repair_action'] ) &&
+			isset( $_POST['pfbt_repair_nonce'] ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pfbt_repair_nonce'] ) ), 'pfbt_repair_action' ) ) {
 			self::handle_repair_action();
 		}
 
@@ -63,7 +63,7 @@ class PFPU_Repair_Tool {
 		$scan_results = self::scan_posts();
 
 		// Render the page.
-		include PFPU_PLUGIN_DIR . 'templates/repair-tool-page.php';
+		include PFBT_PLUGIN_DIR . 'templates/repair-tool-page.php';
 	}
 
 	/**
@@ -92,7 +92,7 @@ class PFPU_Repair_Tool {
 			$suggested_format = 'standard';
 
 			if ( $first_block ) {
-				$suggested_format = PFPU_Format_Registry::get_format_by_block(
+				$suggested_format = PFBT_Format_Registry::get_format_by_block(
 					$first_block['blockName'],
 					$first_block['attrs']
 				);
@@ -152,10 +152,10 @@ class PFPU_Repair_Tool {
 	 */
 	private static function handle_repair_action() {
 		// Verify nonce.
-		if ( ! isset( $_POST['pfpu_repair_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pfpu_repair_nonce'] ) ), 'pfpu_repair_action' ) ) {
+		if ( ! isset( $_POST['pfbt_repair_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pfbt_repair_nonce'] ) ), 'pfbt_repair_action' ) ) {
 			wp_die(
-				esc_html__( 'Security verification failed. Please try again.', 'post-formats-power-up' ),
-				esc_html__( 'Security Error', 'post-formats-power-up' ),
+				esc_html__( 'Security verification failed. Please try again.', 'post-formats-for-block-themes' ),
+				esc_html__( 'Security Error', 'post-formats-for-block-themes' ),
 				array( 'response' => 403 )
 			);
 		}
@@ -163,14 +163,14 @@ class PFPU_Repair_Tool {
 		// Check capability.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die(
-				esc_html__( 'You do not have sufficient permissions to perform this action.', 'post-formats-power-up' ),
-				esc_html__( 'Permission Denied', 'post-formats-power-up' ),
+				esc_html__( 'You do not have sufficient permissions to perform this action.', 'post-formats-for-block-themes' ),
+				esc_html__( 'Permission Denied', 'post-formats-for-block-themes' ),
 				array( 'response' => 403 )
 			);
 		}
 
-		$action  = isset( $_POST['pfpu_repair_action'] ) ? sanitize_text_field( wp_unslash( $_POST['pfpu_repair_action'] ) ) : '';
-		$dry_run = isset( $_POST['pfpu_dry_run'] ) && '1' === $_POST['pfpu_dry_run'];
+		$action  = isset( $_POST['pfbt_repair_action'] ) ? sanitize_text_field( wp_unslash( $_POST['pfbt_repair_action'] ) ) : '';
+		$dry_run = isset( $_POST['pfbt_dry_run'] ) && '1' === $_POST['pfbt_dry_run'];
 
 		if ( 'apply_all' === $action ) {
 			self::apply_all_suggestions( $dry_run );
@@ -214,7 +214,7 @@ class PFPU_Repair_Tool {
 					'Dry run complete: %d post would be updated.',
 					'Dry run complete: %d posts would be updated.',
 					$updated,
-					'post-formats-power-up'
+					'post-formats-for-block-themes'
 				),
 				$updated
 			);
@@ -225,7 +225,7 @@ class PFPU_Repair_Tool {
 					'Successfully updated %d post format.',
 					'Successfully updated %d post formats.',
 					$updated,
-					'post-formats-power-up'
+					'post-formats-for-block-themes'
 				),
 				$updated
 			);
@@ -238,15 +238,15 @@ class PFPU_Repair_Tool {
 					'%d error occurred.',
 					'%d errors occurred.',
 					$errors,
-					'post-formats-power-up'
+					'post-formats-for-block-themes'
 				),
 				$errors
 			);
 		}
 
 		add_settings_error(
-			'pfpu_repair',
-			'pfpu_repair_success',
+			'pfbt_repair',
+			'pfbt_repair_success',
 			$message,
 			'success'
 		);
@@ -268,35 +268,35 @@ class PFPU_Repair_Tool {
 			if ( $dry_run ) {
 				$message = sprintf(
 					/* translators: %d: Post ID, %s: Format name */
-					__( 'Dry run: Post #%1$d would be changed to %2$s format.', 'post-formats-power-up' ),
+					__( 'Dry run: Post #%1$d would be changed to %2$s format.', 'post-formats-for-block-themes' ),
 					$post_id,
 					$format
 				);
 			} else {
 				$message = sprintf(
 					/* translators: %d: Post ID, %s: Format name */
-					__( 'Post #%1$d successfully updated to %2$s format.', 'post-formats-power-up' ),
+					__( 'Post #%1$d successfully updated to %2$s format.', 'post-formats-for-block-themes' ),
 					$post_id,
 					$format
 				);
 			}
 
 			add_settings_error(
-				'pfpu_repair',
-				'pfpu_repair_success',
+				'pfbt_repair',
+				'pfbt_repair_success',
 				$message,
 				'success'
 			);
 		} else {
 			$message = sprintf(
 				/* translators: %d: Post ID */
-				__( 'Failed to update post #%d.', 'post-formats-power-up' ),
+				__( 'Failed to update post #%d.', 'post-formats-for-block-themes' ),
 				$post_id
 			);
 
 			add_settings_error(
-				'pfpu_repair',
-				'pfpu_repair_error',
+				'pfbt_repair',
+				'pfbt_repair_error',
 				$message,
 				'error'
 			);
@@ -322,7 +322,7 @@ class PFPU_Repair_Tool {
 		}
 
 		// Validate format.
-		if ( ! PFPU_Format_Registry::format_exists( $format ) ) {
+		if ( ! PFBT_Format_Registry::format_exists( $format ) ) {
 			return false;
 		}
 
@@ -339,7 +339,7 @@ class PFPU_Repair_Tool {
 
 		if ( $result ) {
 			// Update meta to track this as auto-repaired.
-			update_post_meta( $post_id, '_pfpu_format_repaired', current_time( 'mysql' ) );
+			update_post_meta( $post_id, '_pfbt_format_repaired', current_time( 'mysql' ) );
 
 			/**
 			 * Fires after format is repaired
@@ -349,7 +349,7 @@ class PFPU_Repair_Tool {
 			 * @param int    $post_id Post ID.
 			 * @param string $format  New format.
 			 */
-			do_action( 'pfpu_format_repaired', $post_id, $format );
+			do_action( 'pfbt_format_repaired', $post_id, $format );
 
 			return true;
 		}
@@ -359,6 +359,6 @@ class PFPU_Repair_Tool {
 }
 
 // Create template file if it doesn't exist (this would normally be separate).
-if ( ! file_exists( PFPU_PLUGIN_DIR . 'templates/repair-tool-page.php' ) ) {
+if ( ! file_exists( PFBT_PLUGIN_DIR . 'templates/repair-tool-page.php' ) ) {
 	// We'll create this file separately.
 }

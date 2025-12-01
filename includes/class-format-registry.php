@@ -5,7 +5,7 @@
  * Manages format definitions, metadata, and configurations for all
  * supported post formats.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  *
  * Accessibility: All format metadata includes semantic descriptions
@@ -24,13 +24,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Format_Registry {
+class PFBT_Format_Registry {
 
 	/**
 	 * Single instance of the class
 	 *
 	 * @since 1.0.0
-	 * @var PFPU_Format_Registry|null
+	 * @var PFBT_Format_Registry|null
 	 */
 	private static $instance = null;
 
@@ -46,7 +46,7 @@ class PFPU_Format_Registry {
 	 * Get singleton instance
 	 *
 	 * @since 1.0.0
-	 * @return PFPU_Format_Registry
+	 * @return PFBT_Format_Registry
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -81,8 +81,8 @@ class PFPU_Format_Registry {
 	private function register_formats() {
 		$this->formats = array(
 			'standard' => array(
-				'name'          => __( 'Standard', 'post-formats-power-up' ),
-				'description'   => __( 'Default post format with full title and content. Best for traditional blog posts.', 'post-formats-power-up' ),
+				'name'          => __( 'Standard', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Default post format with full title and content. Best for traditional blog posts.', 'post-formats-for-block-themes' ),
 				'icon'          => 'admin-post',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -90,8 +90,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/standard',
 			),
 			'aside'    => array(
-				'name'          => __( 'Aside', 'post-formats-power-up' ),
-				'description'   => __( 'Short note or update without a title. Displays in a bubble style with minimized metadata.', 'post-formats-power-up' ),
+				'name'          => __( 'Aside', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Short note or update without a title. Displays in a bubble style with minimized metadata.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-aside',
 				'title_visible' => false,
 				'meta_behavior' => 'minimized',
@@ -99,8 +99,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/aside',
 			),
 			'audio'    => array(
-				'name'          => __( 'Audio', 'post-formats-power-up' ),
-				'description'   => __( 'Audio file or embed. Starts with an audio block for podcasts or music.', 'post-formats-power-up' ),
+				'name'          => __( 'Audio', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Audio file or embed. Starts with an audio block for podcasts or music.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-audio',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -108,8 +108,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/audio',
 			),
 			'chat'     => array(
-				'name'          => __( 'Chat', 'post-formats-power-up' ),
-				'description'   => __( 'Chat transcript or conversation log. Supports Slack, Discord, Teams, WhatsApp, and transcript formats (VTT, SRT, TXT, MD, DOC, HTML, RTF).', 'post-formats-power-up' ),
+				'name'          => __( 'Chat', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Chat transcript or conversation log. Supports Slack, Discord, Teams, WhatsApp, and transcript formats (VTT, SRT, TXT, MD, DOC, HTML, RTF).', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-chat',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -117,8 +117,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/chat',
 			),
 			'gallery'  => array(
-				'name'          => __( 'Gallery', 'post-formats-power-up' ),
-				'description'   => __( 'Image gallery post. Starts with a gallery block for multiple images.', 'post-formats-power-up' ),
+				'name'          => __( 'Gallery', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Image gallery post. Starts with a gallery block for multiple images.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-gallery',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -126,8 +126,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/gallery',
 			),
 			'image'    => array(
-				'name'          => __( 'Image', 'post-formats-power-up' ),
-				'description'   => __( 'Single image post. Starts with an image block for photo-centric content.', 'post-formats-power-up' ),
+				'name'          => __( 'Image', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Single image post. Starts with an image block for photo-centric content.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-image',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -135,8 +135,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/image',
 			),
 			'link'     => array(
-				'name'           => __( 'Link', 'post-formats-power-up' ),
-				'description'    => __( 'Link to external content. Uses Bookmark Card plugin if available, otherwise starts with link paragraph.', 'post-formats-power-up' ),
+				'name'           => __( 'Link', 'post-formats-for-block-themes' ),
+				'description'    => __( 'Link to external content. Uses Bookmark Card plugin if available, otherwise starts with link paragraph.', 'post-formats-for-block-themes' ),
 				'icon'           => 'admin-links',
 				'title_visible'  => true,
 				'meta_behavior'  => 'normal',
@@ -145,8 +145,8 @@ class PFPU_Format_Registry {
 				'pattern_name'   => 'pfpu/link',
 			),
 			'quote'    => array(
-				'name'          => __( 'Quote', 'post-formats-power-up' ),
-				'description'   => __( 'Quotation or citation. Starts with a quote block for highlighted text.', 'post-formats-power-up' ),
+				'name'          => __( 'Quote', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Quotation or citation. Starts with a quote block for highlighted text.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-quote',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -154,8 +154,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/quote',
 			),
 			'status'   => array(
-				'name'          => __( 'Status', 'post-formats-power-up' ),
-				'description'   => __( 'Short status update without title. Limited to 280 characters, Twitter-style.', 'post-formats-power-up' ),
+				'name'          => __( 'Status', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Short status update without title. Limited to 280 characters, Twitter-style.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-status',
 				'title_visible' => false,
 				'meta_behavior' => 'author_date_only',
@@ -164,8 +164,8 @@ class PFPU_Format_Registry {
 				'pattern_name'  => 'pfpu/status',
 			),
 			'video'    => array(
-				'name'          => __( 'Video', 'post-formats-power-up' ),
-				'description'   => __( 'Video file or embed. Starts with a video block for multimedia content.', 'post-formats-power-up' ),
+				'name'          => __( 'Video', 'post-formats-for-block-themes' ),
+				'description'   => __( 'Video file or embed. Starts with a video block for multimedia content.', 'post-formats-for-block-themes' ),
 				'icon'          => 'format-video',
 				'title_visible' => true,
 				'meta_behavior' => 'normal',
@@ -183,7 +183,7 @@ class PFPU_Format_Registry {
 		 *
 		 * @param array $formats Array of format definitions.
 		 */
-		$this->formats = apply_filters( 'pfpu_registered_formats', $this->formats );
+		$this->formats = apply_filters( 'pfbt_registered_formats', $this->formats );
 	}
 
 	/**

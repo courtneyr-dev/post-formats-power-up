@@ -5,7 +5,7 @@
  * Image gallery post. Starts with a gallery block.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

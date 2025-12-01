@@ -34,11 +34,11 @@ import { parse, createBlock } from '@wordpress/blocks';
  * @param {Function} insertBlocks - The insertBlocks dispatch function
  */
 const insertPatternForFormat = (formatSlug, insertBlocks) => {
-	if (!window.pfpuData.patterns || !window.pfpuData.patterns[formatSlug]) {
+	if (!window.pfbtData.patterns || !window.pfbtData.patterns[formatSlug]) {
 		return;
 	}
 
-	const patternContent = window.pfpuData.patterns[formatSlug];
+	const patternContent = window.pfbtData.patterns[formatSlug];
 	const blocks = parse(patternContent);
 
 	if (blocks.length > 0) {
@@ -72,7 +72,7 @@ const FormatSelectionModal = () => {
 
 	// Show modal on new post (only once)
 	useEffect(() => {
-		if (isNewPost && postType === 'post' && !hasShown && window.pfpuData) {
+		if (isNewPost && postType === 'post' && !hasShown && window.pfbtData) {
 			// Small delay to ensure editor is fully loaded
 			setTimeout(() => {
 				setIsOpen(true);
@@ -86,8 +86,8 @@ const FormatSelectionModal = () => {
 		editPost({ format: formatSlug });
 
 		// Insert pattern if not standard
-		if (formatSlug !== 'standard' && window.pfpuData.formats[formatSlug]) {
-			const format = window.pfpuData.formats[formatSlug];
+		if (formatSlug !== 'standard' && window.pfbtData.formats[formatSlug]) {
+			const format = window.pfbtData.formats[formatSlug];
 
 			// Insert the pattern blocks
 			insertPatternForFormat(formatSlug, insertBlocks);
@@ -96,7 +96,7 @@ const FormatSelectionModal = () => {
 			speak(
 				sprintf(
 					/* translators: %s: Format name */
-					__('Selected %s format. Pattern inserted.', 'post-formats-power-up'),
+					__('Selected %s format. Pattern inserted.', 'post-formats-for-block-themes'),
 					format.name
 				),
 				'polite'
@@ -106,11 +106,11 @@ const FormatSelectionModal = () => {
 		setIsOpen(false);
 	};
 
-	if (!isOpen || !window.pfpuData) {
+	if (!isOpen || !window.pfbtData) {
 		return null;
 	}
 
-	const formats = window.pfpuData.formats;
+	const formats = window.pfbtData.formats;
 	// Sort: Standard first, then alphabetically
 	const sortedFormats = Object.entries(formats).sort((a, b) => {
 		if (a[0] === 'standard') return -1;
@@ -120,7 +120,7 @@ const FormatSelectionModal = () => {
 
 	return (
 		<Modal
-			title={__('Choose Post Format', 'post-formats-power-up')}
+			title={__('Choose Post Format', 'post-formats-for-block-themes')}
 			onRequestClose={() => setIsOpen(false)}
 			className="pfpu-format-modal"
 		>
@@ -186,7 +186,7 @@ const FormatSwitcherPanel = () => {
 			method: 'POST',
 			data: {
 				meta: {
-					_pfpu_format_manual: true,
+					_pfbt_format_manual: true,
 				},
 			},
 		});
@@ -194,8 +194,8 @@ const FormatSwitcherPanel = () => {
 		speak(
 			sprintf(
 				/* translators: %s: Format name */
-				__('Format changed to %s', 'post-formats-power-up'),
-				window.pfpuData.formats[formatSlug]?.name || formatSlug
+				__('Format changed to %s', 'post-formats-for-block-themes'),
+				window.pfbtData.formats[formatSlug]?.name || formatSlug
 			),
 			'polite'
 		);
@@ -203,51 +203,51 @@ const FormatSwitcherPanel = () => {
 		setShowConfirm(false);
 	};
 
-	if (!window.pfpuData) {
+	if (!window.pfbtData) {
 		return null;
 	}
 
-	const formats = window.pfpuData.formats;
+	const formats = window.pfbtData.formats;
 
 	return (
 		<>
 			<SelectControl
-				label={__('Post Format', 'post-formats-power-up')}
+				label={__('Post Format', 'post-formats-for-block-themes')}
 				value={currentFormat}
 				options={Object.entries(formats).map(([slug, format]) => ({
 					label: format.name,
 					value: slug,
 				}))}
 				onChange={handleFormatChange}
-				help={__('Choose the format that best matches your content.', 'post-formats-power-up')}
+				help={__('Choose the format that best matches your content.', 'post-formats-for-block-themes')}
 			/>
 
 			{showConfirm && (
 				<Modal
-					title={__('Change Post Format?', 'post-formats-power-up')}
+					title={__('Change Post Format?', 'post-formats-for-block-themes')}
 					onRequestClose={() => setShowConfirm(false)}
 				>
 					<p>
-						{__('Your post already has content. How would you like to proceed?', 'post-formats-power-up')}
+						{__('Your post already has content. How would you like to proceed?', 'post-formats-for-block-themes')}
 					</p>
 					<div className="pfpu-format-change-actions">
 						<Button
 							variant="primary"
 							onClick={() => applyFormat(pendingFormat, 'replace')}
 						>
-							{__('Replace content with new pattern', 'post-formats-power-up')}
+							{__('Replace content with new pattern', 'post-formats-for-block-themes')}
 						</Button>
 						<Button
 							variant="secondary"
 							onClick={() => applyFormat(pendingFormat, 'keep')}
 						>
-							{__('Keep content, just change format', 'post-formats-power-up')}
+							{__('Keep content, just change format', 'post-formats-for-block-themes')}
 						</Button>
 						<Button
 							variant="tertiary"
 							onClick={() => setShowConfirm(false)}
 						>
-							{__('Cancel', 'post-formats-power-up')}
+							{__('Cancel', 'post-formats-for-block-themes')}
 						</Button>
 					</div>
 				</Modal>
@@ -302,7 +302,7 @@ const StatusParagraphValidator = () => {
 					<strong>
 						{sprintf(
 							/* translators: 1: Current character count, 2: Maximum characters */
-							__('%1$d / %2$d characters', 'post-formats-power-up'),
+							__('%1$d / %2$d characters', 'post-formats-for-block-themes'),
 							charCount,
 							280
 						)}
@@ -310,12 +310,12 @@ const StatusParagraphValidator = () => {
 				</p>
 				{isError && (
 					<p>
-						{__('Status updates should be 280 characters or less for best display.', 'post-formats-power-up')}
+						{__('Status updates should be 280 characters or less for best display.', 'post-formats-for-block-themes')}
 					</p>
 				)}
 				{isWarning && !isError && (
 					<p>
-						{__('Approaching character limit. Consider shortening your status.', 'post-formats-power-up')}
+						{__('Approaching character limit. Consider shortening your status.', 'post-formats-for-block-themes')}
 					</p>
 				)}
 			</Notice>
@@ -328,14 +328,14 @@ const StatusParagraphValidator = () => {
  *
  * Registers all components as a WordPress plugin.
  */
-registerPlugin('post-formats-power-up', {
+registerPlugin('post-formats-for-block-themes', {
 	render: () => {
 		return (
 			<>
 				<FormatSelectionModal />
 				<PluginDocumentSettingPanel
 					name="post-format-switcher"
-					title={__('Post Format', 'post-formats-power-up')}
+					title={__('Post Format', 'post-formats-for-block-themes')}
 					className="pfpu-format-switcher-panel"
 				>
 					<FormatSwitcherPanel />
@@ -383,7 +383,7 @@ addFilter(
 						<span>
 							{sprintf(
 								/* translators: %d: Remaining characters */
-								__('%d characters remaining', 'post-formats-power-up'),
+								__('%d characters remaining', 'post-formats-for-block-themes'),
 								remaining
 							)}
 						</span>

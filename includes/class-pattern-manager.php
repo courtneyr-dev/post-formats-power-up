@@ -5,7 +5,7 @@
  * Manages registration and insertion of block patterns for each post format.
  * Patterns are registered in the 'theme' category with postFormats metadata.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  *
  * Accessibility Implementation:
@@ -26,13 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Pattern_Manager {
+class PFBT_Pattern_Manager {
 
 	/**
 	 * Single instance of the class
 	 *
 	 * @since 1.0.0
-	 * @var PFPU_Pattern_Manager|null
+	 * @var PFBT_Pattern_Manager|null
 	 */
 	private static $instance = null;
 
@@ -48,7 +48,7 @@ class PFPU_Pattern_Manager {
 	 * Get singleton instance
 	 *
 	 * @since 1.0.0
-	 * @return PFPU_Pattern_Manager
+	 * @return PFBT_Pattern_Manager
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -75,7 +75,7 @@ class PFPU_Pattern_Manager {
 	 */
 	public static function register_all_patterns() {
 		$instance = self::instance();
-		$formats  = PFPU_Format_Registry::get_all_formats();
+		$formats  = PFBT_Format_Registry::get_all_formats();
 
 		foreach ( $formats as $slug => $format ) {
 			$instance->register_pattern( $slug, $format );
@@ -91,7 +91,7 @@ class PFPU_Pattern_Manager {
 	 * @param array  $format Format definition.
 	 */
 	private function register_pattern( $slug, $format ) {
-		$pattern_file = PFPU_PLUGIN_DIR . 'patterns/' . $slug . '.php';
+		$pattern_file = PFBT_PLUGIN_DIR . 'patterns/' . $slug . '.php';
 
 		// Check if pattern file exists.
 		if ( ! file_exists( $pattern_file ) ) {
@@ -111,7 +111,7 @@ class PFPU_Pattern_Manager {
 			array(
 				'title'       => sprintf(
 					/* translators: %s: Format name */
-					__( '%s Post Format', 'post-formats-power-up' ),
+					__( '%s Post Format', 'post-formats-for-block-themes' ),
 					$format['name']
 				),
 				'description' => $format['description'],
@@ -164,7 +164,7 @@ class PFPU_Pattern_Manager {
 		}
 
 		// Try to load it if not already loaded.
-		$pattern_file = PFPU_PLUGIN_DIR . 'patterns/' . $slug . '.php';
+		$pattern_file = PFBT_PLUGIN_DIR . 'patterns/' . $slug . '.php';
 
 		if ( file_exists( $pattern_file ) ) {
 			return $instance->load_pattern_file( $pattern_file );
@@ -219,7 +219,7 @@ class PFPU_Pattern_Manager {
 	 * @return array Array of pattern names (prefixed with 'pfpu/').
 	 */
 	public static function get_pattern_names() {
-		$formats = PFPU_Format_Registry::get_all_formats();
+		$formats = PFBT_Format_Registry::get_all_formats();
 		$names   = array();
 
 		foreach ( $formats as $slug => $format ) {

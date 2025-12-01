@@ -1,8 +1,8 @@
 <?php
 /**
- * PHPUnit bootstrap file for Post Formats Power-Up
+ * PHPUnit bootstrap file for Post Formats for Block Themes
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  */
 
 // Composer autoloader must be loaded before WordPress test suite.
@@ -27,7 +27,7 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require dirname( __DIR__ ) . '/post-formats-power-up.php';
+	require dirname( __DIR__ ) . '/post-formats-for-block-themes.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

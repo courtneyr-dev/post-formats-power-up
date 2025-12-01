@@ -1,6 +1,6 @@
-# Post Formats Power-Up - Testing Guide
+# Post Formats for Block Themes - Testing Guide
 
-This document explains how to run and maintain tests for the Post Formats Power-Up plugin.
+This document explains how to run and maintain tests for the Post Formats for Block Themes plugin.
 
 ## Test Structure
 
@@ -158,7 +158,7 @@ GitHub Actions runs all tests automatically on:
 - Every pull request
 - Nightly builds (full matrix)
 
-View results at: `https://github.com/your-username/post-formats-power-up/actions`
+View results at: `https://github.com/your-username/post-formats-for-block-themes/actions`
 
 ## Writing New Tests
 
@@ -345,6 +345,6 @@ npm run test:js -- --coverage
 
 ## Getting Help
 
-- **Bug in tests**: [Open an issue](https://github.com/your-username/post-formats-power-up/issues)
-- **Questions**: [GitHub Discussions](https://github.com/your-username/post-formats-power-up/discussions)
-- **WordPress Testing**: [WordPress.org Support Forum](https://wordpress.org/support/plugin/post-formats-power-up/)
+- **Bug in tests**: [Open an issue](https://github.com/your-username/post-formats-for-block-themes/issues)
+- **Questions**: [GitHub Discussions](https://github.com/your-username/post-formats-for-block-themes/discussions)
+- **WordPress Testing**: [WordPress.org Support Forum](https://wordpress.org/support/plugin/post-formats-for-block-themes/)

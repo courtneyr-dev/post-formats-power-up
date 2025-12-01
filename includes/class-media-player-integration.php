@@ -6,7 +6,7 @@
  * - AblePlayer (https://wordpress.org/plugins/ableplayer/)
  * - Podlove Podcasting Plugin (https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/)
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Media_Player_Integration {
+class PFBT_Media_Player_Integration {
 
 	/**
 	 * Initialize the integration
@@ -178,4 +178,4 @@ class PFPU_Media_Player_Integration {
 }
 
 // Initialize the integration
-PFPU_Media_Player_Integration::init();
+PFBT_Media_Player_Integration::init();

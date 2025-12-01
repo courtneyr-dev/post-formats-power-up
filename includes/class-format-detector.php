@@ -5,7 +5,7 @@
  * Automatically detects and sets post formats based on content structure.
  * Analyzes the first block in post content to determine the appropriate format.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  *
  * Security Implementation:
@@ -27,13 +27,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Format_Detector {
+class PFBT_Format_Detector {
 
 	/**
 	 * Single instance of the class
 	 *
 	 * @since 1.0.0
-	 * @var PFPU_Format_Detector|null
+	 * @var PFBT_Format_Detector|null
 	 */
 	private static $instance = null;
 
@@ -43,7 +43,7 @@ class PFPU_Format_Detector {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const META_KEY_MANUAL = '_pfpu_format_manual';
+	const META_KEY_MANUAL = '_pfbt_format_manual';
 
 	/**
 	 * Meta key for tracking detected format
@@ -51,13 +51,13 @@ class PFPU_Format_Detector {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const META_KEY_DETECTED = '_pfpu_format_detected';
+	const META_KEY_DETECTED = '_pfbt_format_detected';
 
 	/**
 	 * Get singleton instance
 	 *
 	 * @since 1.0.0
-	 * @return PFPU_Format_Detector
+	 * @return PFBT_Format_Detector
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -138,7 +138,7 @@ class PFPU_Format_Detector {
 		 * @param string $detected_format Detected format slug.
 		 * @param WP_Post $post           Post object.
 		 */
-		do_action( 'pfpu_format_detected', $post_id, $detected_format, $post );
+		do_action( 'pfbt_format_detected', $post_id, $detected_format, $post );
 	}
 
 	/**
@@ -198,7 +198,7 @@ class PFPU_Format_Detector {
 		}
 
 		// Get format based on block type.
-		$format = PFPU_Format_Registry::get_format_by_block(
+		$format = PFBT_Format_Registry::get_format_by_block(
 			$first_block['blockName'],
 			$first_block['attrs']
 		);
@@ -214,7 +214,7 @@ class PFPU_Format_Detector {
 		 * @param array  $first_block First block data.
 		 * @param array  $all_blocks  All parsed blocks.
 		 */
-		return apply_filters( 'pfpu_detected_format', $format, $first_block, $blocks );
+		return apply_filters( 'pfbt_detected_format', $format, $first_block, $blocks );
 	}
 
 	/**

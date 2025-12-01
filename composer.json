@@ -1,5 +1,5 @@
 {
-  "name": "courane01/post-formats-power-up",
+  "name": "courane01/post-formats-for-block-themes",
   "description": "Modernizes WordPress post formats for block themes with format-specific patterns, auto-detection, and enhanced editor experience.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
@@ -27,9 +27,9 @@
     ],
     "phpcs": "phpcs -d memory_limit=512M --standard=WordPress --extensions=php --colors --ignore=*/vendor/*,*/node_modules/*,*/tests/* .",
     "phpcbf": "phpcbf -d memory_limit=512M --standard=WordPress --extensions=php --ignore=*/vendor/*,*/node_modules/*,*/tests/* .",
-    "phpstan": "phpstan analyse --memory-limit=1G includes/ blocks/ post-formats-power-up.php",
+    "phpstan": "phpstan analyse --memory-limit=1G includes/ blocks/ post-formats-for-block-themes.php",
     "phpunit": "phpunit",
-    "i18n": "wp i18n make-pot . languages/post-formats-power-up.pot --exclude=node_modules,vendor,tests",
+    "i18n": "wp i18n make-pot . languages/post-formats-for-block-themes.pot --exclude=node_modules,vendor,tests",
     "build": [
       "@test",
       "@i18n"

@@ -118,7 +118,7 @@ test.describe('JavaScript Performance', () => {
 		// Filter out known WordPress errors or other plugins
 		const pluginErrors = errors.filter(err =>
 			err.includes('pfpu') ||
-			err.includes('post-formats-power-up') ||
+			err.includes('post-formats-for-block-themes') ||
 			err.includes('format-modal')
 		);
 
@@ -144,7 +144,7 @@ test.describe('JavaScript Performance', () => {
 		const metrics = await page.evaluate(() => {
 			const perfData = performance.getEntriesByType('resource');
 			const cssResources = perfData.filter(entry =>
-				entry.name.includes('post-formats-power-up') &&
+				entry.name.includes('post-formats-for-block-themes') &&
 				entry.name.endsWith('.css')
 			);
 
@@ -192,7 +192,7 @@ test.describe('Frontend Performance', () => {
 		const cssMetrics = await page.evaluate(() => {
 			const perfData = performance.getEntriesByType('resource');
 			const pluginCSS = perfData.filter(entry =>
-				entry.name.includes('post-formats-power-up') &&
+				entry.name.includes('post-formats-for-block-themes') &&
 				entry.name.endsWith('.css')
 			);
 
@@ -217,7 +217,7 @@ test.describe('Frontend Performance', () => {
 		const jsMetrics = await page.evaluate(() => {
 			const perfData = performance.getEntriesByType('resource');
 			const pluginJS = perfData.filter(entry =>
-				entry.name.includes('post-formats-power-up') &&
+				entry.name.includes('post-formats-for-block-themes') &&
 				entry.name.endsWith('.js')
 			);
 

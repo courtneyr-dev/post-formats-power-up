@@ -1,11 +1,11 @@
-# Post Formats Power-Up - Quality Assurance Test Plan
+# Post Formats for Block Themes - Quality Assurance Test Plan
 
 **Version:** 1.0.0
 **Last Updated:** November 28, 2025
 **Testing Environment:** Local by Flywheel - post-formats-test
 **WordPress Version:** 6.8+
 **Theme:** Twenty Twenty-Five (Block Theme)
-**Required Plugins:** Post Formats Power-Up, Chat Log Block
+**Required Plugins:** Post Formats for Block Themes, Chat Log Block
 
 ---
 
@@ -35,7 +35,7 @@
 
 - [ ] WordPress 6.8+ installed
 - [ ] Twenty Twenty-Five theme (or other block theme) active
-- [ ] Post Formats Power-Up plugin activated
+- [ ] Post Formats for Block Themes plugin activated
 - [ ] Chat Log Block plugin activated
 - [ ] No JavaScript errors in browser console
 - [ ] PHP error logging enabled (`WP_DEBUG` and `WP_DEBUG_LOG`)
@@ -79,7 +79,7 @@ Create the following test posts:
 - [ ] "Audio Format" template visible
 - [ ] "Chat Format" template visible
 - [ ] All 9 format templates present
-- [ ] Templates show "Plugin: Post Formats Power-Up" source
+- [ ] Templates show "Plugin: Post Formats for Block Themes" source
 - [ ] No PHP warnings in debug log about template types
 
 ---
@@ -142,7 +142,7 @@ Create the following test posts:
 
 **Steps:**
 1. Create post with Gallery format
-2. Deactivate Post Formats Power-Up plugin
+2. Deactivate Post Formats for Block Themes plugin
 3. View post on frontend
 
 **Expected Results:**
@@ -2484,7 +2484,7 @@ Expected:
 **Start to Finish:**
 
 1. **Install & Activate** (5 min)
-   - [ ] Install Post Formats Power-Up
+   - [ ] Install Post Formats for Block Themes
    - [ ] Install Chat Log Block
    - [ ] Activate both
    - [ ] No errors in debug log
@@ -2558,7 +2558,7 @@ Use this template to record your findings:
 
 **Tester:** [Your Name]
 **Environment:** [Browser, WP Version, PHP Version]
-**Plugins:** Post Formats Power-Up v1.0.0, Chat Log Block v[X]
+**Plugins:** Post Formats for Block Themes v1.0.0, Chat Log Block v[X]
 
 ### ✅ Passed Tests
 - Test 0.1: Template registration ✓

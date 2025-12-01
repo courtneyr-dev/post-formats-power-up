@@ -4,7 +4,7 @@
  *
  * Tests that format detection completes within acceptable time limits.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  */
 
 class Test_Format_Detection_Performance extends WP_UnitTestCase {
@@ -26,7 +26,7 @@ class Test_Format_Detection_Performance extends WP_UnitTestCase {
 		// Run detection
 		$blocks      = parse_blocks( get_post( $post_id )->post_content );
 		$first_block = reset( $blocks );
-		$format      = PFPU_Format_Registry::get_format_by_block(
+		$format      = PFBT_Format_Registry::get_format_by_block(
 			$first_block['blockName'],
 			$first_block['attrs'] ?? array()
 		);
@@ -67,7 +67,7 @@ class Test_Format_Detection_Performance extends WP_UnitTestCase {
 
 			if ( ! empty( $blocks ) ) {
 				$first_block = reset( $blocks );
-				PFPU_Format_Registry::get_format_by_block(
+				PFBT_Format_Registry::get_format_by_block(
 					$first_block['blockName'],
 					$first_block['attrs'] ?? array()
 				);
@@ -85,14 +85,14 @@ class Test_Format_Detection_Performance extends WP_UnitTestCase {
 	 * Target: < 5ms per pattern
 	 */
 	public function test_pattern_retrieval_performance() {
-		$formats = PFPU_Format_Registry::get_all_formats();
+		$formats = PFBT_Format_Registry::get_all_formats();
 
 		$total_time = 0;
 
 		foreach ( array_keys( $formats ) as $format_slug ) {
 			$start = microtime( true );
 
-			$pattern = PFPU_Pattern_Manager::get_pattern( $format_slug );
+			$pattern = PFBT_Pattern_Manager::get_pattern( $format_slug );
 
 			$duration    = ( microtime( true ) - $start ) * 1000;
 			$total_time += $duration;
@@ -114,7 +114,7 @@ class Test_Format_Detection_Performance extends WP_UnitTestCase {
 		// Force re-initialization by clearing static cache if exists
 		$start = microtime( true );
 
-		$formats = PFPU_Format_Registry::get_all_formats();
+		$formats = PFBT_Format_Registry::get_all_formats();
 
 		$duration = ( microtime( true ) - $start ) * 1000;
 

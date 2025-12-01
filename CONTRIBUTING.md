@@ -1,4 +1,4 @@
-# Contributing to Post Formats Power-Up
+# Contributing to Post Formats for Block Themes
 
 Thank you for your interest in contributing! This document provides guidelines for contributing to this WordPress plugin.
 
@@ -6,8 +6,8 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/post-formats-power-up.git
-cd post-formats-power-up
+git clone https://github.com/your-username/post-formats-for-block-themes.git
+cd post-formats-for-block-themes
 
 # Install dependencies
 npm install
@@ -93,7 +93,7 @@ We use [Potomatic](https://github.com/GravityKit/potomatic) for translations:
 composer i18n
 
 # Add your translation
-cp languages/post-formats-power-up.pot languages/post-formats-power-up-{locale}.po
+cp languages/post-formats-for-block-themes.pot languages/post-formats-for-block-themes-{locale}.po
 # Edit the .po file with translations
 ```
 

@@ -5,7 +5,7 @@
  * Registers block styles and theme.json integration for per-format customization.
  * Allows users to customize each post format through the WordPress Site Editor.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PFPU_Format_Styles {
+class PFBT_Format_Styles {
 
 	/**
 	 * Initialize the format styles
@@ -50,12 +50,12 @@ class PFPU_Format_Styles {
 			'core/post-template',
 			array(
 				'name'  => 'format-aware',
-				'label' => __( 'Show Format Styles', 'post-formats-power-up' ),
+				'label' => __( 'Show Format Styles', 'post-formats-for-block-themes' ),
 			)
 		);
 
 		// Register styles for individual post format variations.
-		$formats = PFPU_Format_Registry::get_all_formats();
+		$formats = PFBT_Format_Registry::get_all_formats();
 
 		foreach ( $formats as $slug => $format_data ) {
 			// Skip standard format.
@@ -70,7 +70,7 @@ class PFPU_Format_Styles {
 					'name'  => 'format-' . $slug,
 					'label' => sprintf(
 						/* translators: %s: Format name */
-						__( '%s Format Style', 'post-formats-power-up' ),
+						__( '%s Format Style', 'post-formats-for-block-themes' ),
 						$format_data['name']
 					),
 				)
@@ -93,19 +93,19 @@ class PFPU_Format_Styles {
 		}
 
 		$templates = array(
-			'single-format-aside'   => __( 'Aside Format', 'post-formats-power-up' ),
-			'single-format-gallery' => __( 'Gallery Format', 'post-formats-power-up' ),
-			'single-format-link'    => __( 'Link Format', 'post-formats-power-up' ),
-			'single-format-image'   => __( 'Image Format', 'post-formats-power-up' ),
-			'single-format-quote'   => __( 'Quote Format', 'post-formats-power-up' ),
-			'single-format-status'  => __( 'Status Format', 'post-formats-power-up' ),
-			'single-format-video'   => __( 'Video Format', 'post-formats-power-up' ),
-			'single-format-audio'   => __( 'Audio Format', 'post-formats-power-up' ),
-			'single-format-chat'    => __( 'Chat Format', 'post-formats-power-up' ),
+			'single-format-aside'   => __( 'Aside Format', 'post-formats-for-block-themes' ),
+			'single-format-gallery' => __( 'Gallery Format', 'post-formats-for-block-themes' ),
+			'single-format-link'    => __( 'Link Format', 'post-formats-for-block-themes' ),
+			'single-format-image'   => __( 'Image Format', 'post-formats-for-block-themes' ),
+			'single-format-quote'   => __( 'Quote Format', 'post-formats-for-block-themes' ),
+			'single-format-status'  => __( 'Status Format', 'post-formats-for-block-themes' ),
+			'single-format-video'   => __( 'Video Format', 'post-formats-for-block-themes' ),
+			'single-format-audio'   => __( 'Audio Format', 'post-formats-for-block-themes' ),
+			'single-format-chat'    => __( 'Chat Format', 'post-formats-for-block-themes' ),
 		);
 
 		foreach ( $templates as $slug => $title ) {
-			$template_file = PFPU_PLUGIN_DIR . 'templates/' . $slug . '.html';
+			$template_file = PFBT_PLUGIN_DIR . 'templates/' . $slug . '.html';
 
 			if ( ! file_exists( $template_file ) ) {
 				continue;
@@ -126,7 +126,7 @@ class PFPU_Format_Styles {
 
 			$template              = new WP_Block_Template();
 			$template->slug        = $slug;
-			$template->id          = 'post-formats-power-up//' . $slug;
+			$template->id          = 'post-formats-for-block-themes//' . $slug;
 			$template->theme       = get_stylesheet();
 			$template->content     = file_get_contents( $template_file );
 			$template->source      = 'plugin';
@@ -134,7 +134,7 @@ class PFPU_Format_Styles {
 			$template->title       = $title;
 			$template->description = sprintf(
 				/* translators: %s: Format name */
-				__( 'Template for displaying %s posts', 'post-formats-power-up' ),
+				__( 'Template for displaying %s posts', 'post-formats-for-block-themes' ),
 				strtolower( $title )
 			);
 			$template->status         = 'publish';
@@ -170,7 +170,7 @@ class PFPU_Format_Styles {
 			return $template;
 		}
 
-		$template_file = PFPU_PLUGIN_DIR . 'templates/' . $slug . '.html';
+		$template_file = PFBT_PLUGIN_DIR . 'templates/' . $slug . '.html';
 
 		if ( ! file_exists( $template_file ) ) {
 			return $template;
@@ -202,7 +202,7 @@ class PFPU_Format_Styles {
 	 * @return WP_Theme_JSON_Data Modified theme JSON data.
 	 */
 	public static function merge_theme_json( $theme_json ) {
-		$plugin_theme_json_file = PFPU_PLUGIN_DIR . 'theme.json';
+		$plugin_theme_json_file = PFBT_PLUGIN_DIR . 'theme.json';
 
 		if ( ! file_exists( $plugin_theme_json_file ) ) {
 			return $theme_json;
@@ -276,7 +276,7 @@ class PFPU_Format_Styles {
 		$template_slug = 'single-format-' . $format;
 
 		// Check if this template exists.
-		$template_file = PFPU_PLUGIN_DIR . 'templates/' . $template_slug . '.html';
+		$template_file = PFBT_PLUGIN_DIR . 'templates/' . $template_slug . '.html';
 
 		if ( file_exists( $template_file ) ) {
 			// Assign the template.
@@ -295,47 +295,47 @@ class PFPU_Format_Styles {
 	public static function get_format_colors() {
 		return array(
 			'aside'   => array(
-				'name'  => __( 'Aside Format', 'post-formats-power-up' ),
+				'name'  => __( 'Aside Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-aside',
 				'color' => '#f0f0f1',
 			),
 			'status'  => array(
-				'name'  => __( 'Status Format', 'post-formats-power-up' ),
+				'name'  => __( 'Status Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-status',
 				'color' => '#f0f0f1',
 			),
 			'link'    => array(
-				'name'  => __( 'Link Format', 'post-formats-power-up' ),
+				'name'  => __( 'Link Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-link',
 				'color' => '#0073aa',
 			),
 			'quote'   => array(
-				'name'  => __( 'Quote Format', 'post-formats-power-up' ),
+				'name'  => __( 'Quote Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-quote',
 				'color' => '#0073aa',
 			),
 			'gallery' => array(
-				'name'  => __( 'Gallery Format', 'post-formats-power-up' ),
+				'name'  => __( 'Gallery Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-gallery',
 				'color' => '#f0f0f1',
 			),
 			'image'   => array(
-				'name'  => __( 'Image Format', 'post-formats-power-up' ),
+				'name'  => __( 'Image Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-image',
 				'color' => '#cccccc',
 			),
 			'video'   => array(
-				'name'  => __( 'Video Format', 'post-formats-power-up' ),
+				'name'  => __( 'Video Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-video',
 				'color' => '#f0f0f1',
 			),
 			'audio'   => array(
-				'name'  => __( 'Audio Format', 'post-formats-power-up' ),
+				'name'  => __( 'Audio Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-audio',
 				'color' => '#f0f0f1',
 			),
 			'chat'    => array(
-				'name'  => __( 'Chat Format', 'post-formats-power-up' ),
+				'name'  => __( 'Chat Format', 'post-formats-for-block-themes' ),
 				'slug'  => 'format-chat',
 				'color' => '#f0f0f1',
 			),
@@ -344,4 +344,4 @@ class PFPU_Format_Styles {
 }
 
 // Initialize format styles.
-PFPU_Format_Styles::init();
+PFBT_Format_Styles::init();

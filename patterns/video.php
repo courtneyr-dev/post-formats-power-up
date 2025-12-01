@@ -5,7 +5,7 @@
  * Video file or embed. Starts with a video block.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

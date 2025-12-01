@@ -5,7 +5,7 @@
  * Short note or update without a title. Displays in a bubble style.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 

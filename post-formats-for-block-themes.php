@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Post Formats Power-Up
- * Plugin URI: https://wordpress.org/plugins/post-formats-power-up/
+ * Plugin Name: Post Formats for Block Themes
+ * Plugin URI: https://wordpress.org/plugins/post-formats-for-block-themes/
  * Description: Modernizes WordPress post formats for block themes with format-specific patterns, auto-detection, and enhanced editor experience.
  * Version: 1.0.0
  * Requires at least: 6.8
@@ -10,10 +10,10 @@
  * Author URI: https://profiles.wordpress.org/courane01/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: post-formats-power-up
+ * Text Domain: post-formats-for-block-themes
  * Domain Path: /languages
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  *
  * Accessibility Implementation:
  * - All UI components use semantic HTML and ARIA labels
@@ -23,7 +23,7 @@
  * - All strings are translatable with proper text domain
  *
  * Translation Support:
- * - Text Domain: post-formats-power-up
+ * - Text Domain: post-formats-for-block-themes
  * - All user-facing strings wrapped in translation functions
  * - JavaScript translations loaded via wp_set_script_translations()
  * - RTL language support included
@@ -37,17 +37,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants
  */
-define( 'PFPU_VERSION', '1.0.0' );
-define( 'PFPU_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'PFPU_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'PFPU_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'PFBT_VERSION', '1.0.0' );
+define( 'PFBT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'PFBT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'PFBT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Register format template types VERY early to prevent warnings
  *
  * @since 1.0.0
  */
-function pfpu_register_template_types_early( $template_types ) {
+function pfbt_register_template_types_early( $template_types ) {
 	$format_types = array(
 		'single-format-aside',
 		'single-format-gallery',
@@ -73,7 +73,7 @@ function pfpu_register_template_types_early( $template_types ) {
 
 	return $template_types;
 }
-add_filter( 'default_template_types', 'pfpu_register_template_types_early', 1 );
+add_filter( 'default_template_types', 'pfbt_register_template_types_early', 1 );
 
 /**
  * Suppress template type warnings from WordPress core timing issue
@@ -122,20 +122,20 @@ set_error_handler(
  *
  * @since 1.0.0
  */
-function pfpu_include_files() {
-	require_once PFPU_PLUGIN_DIR . 'includes/class-format-registry.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-format-detector.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-pattern-manager.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-block-locker.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-repair-tool.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-media-player-integration.php';
-	require_once PFPU_PLUGIN_DIR . 'includes/class-format-styles.php';
+function pfbt_include_files() {
+	require_once PFBT_PLUGIN_DIR . 'includes/class-format-registry.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-format-detector.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-pattern-manager.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-block-locker.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-repair-tool.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-media-player-integration.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-format-styles.php';
 
 	// Include Chat Log block (integrated)
 	// This provides the chatlog/conversation block for the Chat post format
-	require_once PFPU_PLUGIN_DIR . 'blocks/chatlog/chatlog-block.php';
+	require_once PFBT_PLUGIN_DIR . 'blocks/chatlog/chatlog-block.php';
 }
-add_action( 'plugins_loaded', 'pfpu_include_files' );
+add_action( 'plugins_loaded', 'pfbt_include_files' );
 
 /**
  * Initialize plugin
@@ -145,7 +145,7 @@ add_action( 'plugins_loaded', 'pfpu_include_files' );
  *
  * @since 1.0.0
  */
-function pfpu_init() {
+function pfbt_init() {
 	// Register theme support for all post formats.
 	add_theme_support(
 		'post-formats',
@@ -163,15 +163,15 @@ function pfpu_init() {
 	);
 
 	// Initialize plugin classes.
-	PFPU_Format_Registry::instance();
-	PFPU_Format_Detector::instance();
-	PFPU_Pattern_Manager::instance();
-	PFPU_Block_Locker::instance();
+	PFBT_Format_Registry::instance();
+	PFBT_Format_Detector::instance();
+	PFBT_Pattern_Manager::instance();
+	PFBT_Block_Locker::instance();
 
 	// Register patterns after WordPress is fully loaded.
-	add_action( 'init', array( 'PFPU_Pattern_Manager', 'register_all_patterns' ) );
+	add_action( 'init', array( 'PFBT_Pattern_Manager', 'register_all_patterns' ) );
 }
-add_action( 'after_setup_theme', 'pfpu_init' );
+add_action( 'after_setup_theme', 'pfbt_init' );
 
 /**
  * Enqueue editor assets
@@ -183,7 +183,7 @@ add_action( 'after_setup_theme', 'pfpu_init' );
  *
  * @since 1.0.0
  */
-function pfpu_enqueue_editor_assets() {
+function pfbt_enqueue_editor_assets() {
 	$screen = get_current_screen();
 
 	// Only load on post editor screens.
@@ -192,12 +192,12 @@ function pfpu_enqueue_editor_assets() {
 	}
 
 	// Load asset file with dependencies.
-	$asset_file = include PFPU_PLUGIN_DIR . 'build/index.asset.php';
+	$asset_file = include PFBT_PLUGIN_DIR . 'build/index.asset.php';
 
 	// Editor script.
 	wp_enqueue_script(
 		'pfpu-editor',
-		PFPU_PLUGIN_URL . 'build/index.js',
+		PFBT_PLUGIN_URL . 'build/index.js',
 		$asset_file['dependencies'],
 		$asset_file['version'],
 		true
@@ -206,14 +206,14 @@ function pfpu_enqueue_editor_assets() {
 	// Load JavaScript translations.
 	wp_set_script_translations(
 		'pfpu-editor',
-		'post-formats-power-up',
-		PFPU_PLUGIN_DIR . 'languages'
+		'post-formats-for-block-themes',
+		PFBT_PLUGIN_DIR . 'languages'
 	);
 
 	// Get pattern content for all formats.
 	$patterns = array();
-	foreach ( PFPU_Format_Registry::get_all_formats() as $slug => $format ) {
-		$pattern_content = PFPU_Pattern_Manager::get_pattern( $slug );
+	foreach ( PFBT_Format_Registry::get_all_formats() as $slug => $format ) {
+		$pattern_content = PFBT_Pattern_Manager::get_pattern( $slug );
 		if ( $pattern_content ) {
 			$patterns[ $slug ] = $pattern_content;
 		}
@@ -222,21 +222,21 @@ function pfpu_enqueue_editor_assets() {
 	// Pass data to JavaScript.
 	wp_localize_script(
 		'pfpu-editor',
-		'pfpuData',
+		'pfbtData',
 		array(
-			'formats'         => PFPU_Format_Registry::get_all_formats(),
+			'formats'         => PFBT_Format_Registry::get_all_formats(),
 			'patterns'        => $patterns,
 			'hasBookmarkCard' => function_exists( 'bookmark_card_register_block' ) || has_block( 'bookmark-card/bookmark-card' ),
 			'hasChatLog'      => true, // Chat Log block is now integrated
-			'nonce'           => wp_create_nonce( 'pfpu_editor_nonce' ),
+			'nonce'           => wp_create_nonce( 'pfbt_editor_nonce' ),
 			'currentFormat'   => get_post_format() ?: 'standard',
 		)
 	);
 
 	// Note: Editor styles are inline in the JavaScript components.
-	// Frontend styles are loaded via pfpu_enqueue_frontend_styles().
+	// Frontend styles are loaded via pfbt_enqueue_frontend_styles().
 }
-add_action( 'enqueue_block_editor_assets', 'pfpu_enqueue_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'pfbt_enqueue_editor_assets' );
 
 /**
  * Enqueue frontend styles
@@ -246,15 +246,15 @@ add_action( 'enqueue_block_editor_assets', 'pfpu_enqueue_editor_assets' );
  *
  * @since 1.0.0
  */
-function pfpu_enqueue_frontend_assets() {
+function pfbt_enqueue_frontend_assets() {
 	wp_enqueue_style(
 		'pfpu-format-styles',
-		PFPU_PLUGIN_URL . 'styles/format-styles.css',
+		PFBT_PLUGIN_URL . 'styles/format-styles.css',
 		array(),
-		PFPU_VERSION
+		PFBT_VERSION
 	);
 }
-add_action( 'wp_enqueue_scripts', 'pfpu_enqueue_frontend_assets' );
+add_action( 'wp_enqueue_scripts', 'pfbt_enqueue_frontend_assets' );
 
 /**
  * Add admin menu for repair tool
@@ -263,16 +263,16 @@ add_action( 'wp_enqueue_scripts', 'pfpu_enqueue_frontend_assets' );
  *
  * @since 1.0.0
  */
-function pfpu_add_admin_menu() {
+function pfbt_add_admin_menu() {
 	add_management_page(
-		__( 'Post Format Repair', 'post-formats-power-up' ),
-		__( 'Post Format Repair', 'post-formats-power-up' ),
+		__( 'Post Format Repair', 'post-formats-for-block-themes' ),
+		__( 'Post Format Repair', 'post-formats-for-block-themes' ),
 		'manage_options',
 		'pfpu-repair-tool',
-		array( 'PFPU_Repair_Tool', 'render_page' )
+		array( 'PFBT_Repair_Tool', 'render_page' )
 	);
 }
-add_action( 'admin_menu', 'pfpu_add_admin_menu' );
+add_action( 'admin_menu', 'pfbt_add_admin_menu' );
 
 /**
  * Register block patterns on init
@@ -281,10 +281,10 @@ add_action( 'admin_menu', 'pfpu_add_admin_menu' );
  *
  * @since 1.0.0
  */
-function pfpu_register_patterns() {
-	PFPU_Pattern_Manager::register_all_patterns();
+function pfbt_register_patterns() {
+	PFBT_Pattern_Manager::register_all_patterns();
 }
-add_action( 'init', 'pfpu_register_patterns', 20 );
+add_action( 'init', 'pfbt_register_patterns', 20 );
 
 /**
  * Activation hook
@@ -294,32 +294,32 @@ add_action( 'init', 'pfpu_register_patterns', 20 );
  *
  * @since 1.0.0
  */
-function pfpu_activate() {
+function pfbt_activate() {
 	// Check WordPress version.
 	if ( version_compare( get_bloginfo( 'version' ), '6.8', '<' ) ) {
-		deactivate_plugins( PFPU_PLUGIN_BASENAME );
+		deactivate_plugins( PFBT_PLUGIN_BASENAME );
 		wp_die(
-			esc_html__( 'Post Formats Power-Up requires WordPress 6.8 or higher.', 'post-formats-power-up' ),
-			esc_html__( 'Plugin Activation Error', 'post-formats-power-up' ),
+			esc_html__( 'Post Formats for Block Themes requires WordPress 6.8 or higher.', 'post-formats-for-block-themes' ),
+			esc_html__( 'Plugin Activation Error', 'post-formats-for-block-themes' ),
 			array( 'back_link' => true )
 		);
 	}
 
 	// Check for block theme.
 	if ( ! wp_is_block_theme() ) {
-		deactivate_plugins( PFPU_PLUGIN_BASENAME );
+		deactivate_plugins( PFBT_PLUGIN_BASENAME );
 		wp_die(
-			esc_html__( 'Post Formats Power-Up requires a block theme. Classic themes are not supported.', 'post-formats-power-up' ),
-			esc_html__( 'Plugin Activation Error', 'post-formats-power-up' ),
+			esc_html__( 'Post Formats for Block Themes requires a block theme. Classic themes are not supported.', 'post-formats-for-block-themes' ),
+			esc_html__( 'Plugin Activation Error', 'post-formats-for-block-themes' ),
 			array( 'back_link' => true )
 		);
 	}
 
 	// Set default options.
-	add_option( 'pfpu_version', PFPU_VERSION );
-	add_option( 'pfpu_activated_time', time() );
+	add_option( 'pfbt_version', PFBT_VERSION );
+	add_option( 'pfbt_activated_time', time() );
 }
-register_activation_hook( __FILE__, 'pfpu_activate' );
+register_activation_hook( __FILE__, 'pfbt_activate' );
 
 /**
  * Deactivation hook
@@ -328,9 +328,9 @@ register_activation_hook( __FILE__, 'pfpu_activate' );
  *
  * @since 1.0.0
  */
-function pfpu_deactivate() {
+function pfbt_deactivate() {
 	// Cleanup transients.
-	delete_transient( 'pfpu_bookmark_card_available' );
-	delete_transient( 'pfpu_chatlog_block_available' );
+	delete_transient( 'pfbt_bookmark_card_available' );
+	delete_transient( 'pfbt_chatlog_block_available' );
 }
-register_deactivation_hook( __FILE__, 'pfpu_deactivate' );
+register_deactivation_hook( __FILE__, 'pfbt_deactivate' );

@@ -5,7 +5,7 @@
  * Audio file or embed. Starts with an audio block.
  * First block is locked to maintain format integrity.
  *
- * @package PostFormatsPowerUp
+ * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>

@@ -5,7 +5,7 @@ Tags: post-formats, block-theme, patterns, block-editor, chat-log
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,19 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 
 == Changelog ==
 
+= 1.1.4 - 2025-12-19 =
+
+**Bug Fixes**
+
+* **Fixed:** Critical issue where plugin's theme.json was overriding theme layout settings (contentSize, wideSize), causing blank templates
+* **Fixed:** Plugin no longer overrides theme spacing settings (spacingSizes)
+* **Fixed:** Removed appearanceTools setting that could conflict with theme settings
+
+**Changes**
+
+* **Changed:** Simplified theme.json to only include format-specific color palette additions
+* **Changed:** Plugin now respects all theme layout and spacing settings
+
 = 1.1.3 - 2025-12-18 =
 
 **Performance**
@@ -493,6 +506,9 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 * **Privacy:** No data collection, external API calls, cookies, or user tracking
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+Critical fix: Resolves issue where plugin's theme.json was overriding theme layout settings and causing blank templates. All users should upgrade immediately.
 
 = 1.1.3 =
 Critical performance fix: Resolves database performance issue with revision queries. Also fixes duplicate pattern insertion, character counter appearing twice, and JavaScript errors. Simplified patterns for cleaner editing. All users should upgrade.

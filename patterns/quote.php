@@ -6,21 +6,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Quote Post Format Pattern
  *
- * Quotation or citation. Starts with a quote block.
+ * Quotation or citation. Starts with a quote block followed by a paragraph.
  *
  * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:quote -->
-	<blockquote class="wp-block-quote">
-	<!-- wp:paragraph -->
-	<p></p>
-	<!-- /wp:paragraph -->
-	</blockquote>
-	<!-- /wp:quote -->
-</div>
-<!-- /wp:group -->
+<!-- wp:quote -->
+<blockquote class="wp-block-quote">
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+</blockquote>
+<!-- /wp:quote -->
 
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

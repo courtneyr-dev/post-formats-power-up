@@ -5,7 +5,7 @@ Tags: post-formats, block-theme, patterns, block-editor, chat-log
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,41 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 
 == Changelog ==
 
+= 1.1.3 - 2025-12-18 =
+
+**Performance**
+
+* **Fixed:** Critical performance issue with revision queries returning 11,000+ rows on sites with many synced patterns
+* **Added:** Transient-based caching for pattern registration to avoid unnecessary database operations
+* **Added:** Pattern registration now skipped entirely on front-end for better performance
+* **Added:** Pattern updates only occur when content has actually changed
+* **Added:** Revision limiter for wp_block post type (limits to 3 revisions to prevent database bloat)
+
+**New Features**
+
+* **Added:** "Settings" link on Plugins page that links to Post Format Repair tool for easy access
+
+**Bug Fixes**
+
+* **Fixed:** Duplicate pattern insertion when selecting format from modal (patterns were being inserted twice)
+* **Fixed:** Status format character counter appearing twice in editor
+* **Fixed:** Aside format icon not displaying in Posts admin list (changed from `dashicons-aside` to `dashicons-format-aside`)
+* **Fixed:** JavaScript error "Cannot read properties of undefined (reading 'postCategories')" in block editor
+* **Fixed:** Pattern transient now cleared on plugin deactivation to ensure fresh patterns on reactivation
+
+**Improvements**
+
+* **Changed:** Simplified all format patterns by removing unnecessary wrapper Group blocks
+* **Changed:** Status pattern now uses single paragraph with `status-paragraph` class
+* **Changed:** Aside pattern now uses single paragraph (no wrapper)
+* **Changed:** All other format patterns now use primary block + paragraph structure for cleaner editing
+
+**Security**
+
+* **Added:** `domReady` wrapper for Post Format Block to prevent race conditions
+* **Added:** Null check with fallback icon for safer script initialization
+* **Added:** Asset file for Post Format Block script dependencies
+
 = 1.1.2 - 2025-12-11 =
 
 **New Features**
@@ -458,6 +493,15 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 * **Privacy:** No data collection, external API calls, cookies, or user tracking
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+Critical performance fix: Resolves database performance issue with revision queries. Also fixes duplicate pattern insertion, character counter appearing twice, and JavaScript errors. Simplified patterns for cleaner editing. All users should upgrade.
+
+= 1.1.2 =
+Editor UI improvements: Simplified format selection, better template chooser, fixed standard posts incorrectly showing format templates.
+
+= 1.1.1 =
+Critical fix: Format templates no longer appear in Template dropdown, fixing template selection issues.
 
 = 1.1.0 =
 Major update: Adds Post Format Block for frontend display, post format admin column with filtering, template improvements with category/tag/format display, and critical bug fixes for template assignment. All users should upgrade.

@@ -13,13 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 
-// Paragraph with status-paragraph class for validation.
+// Single paragraph with status-paragraph class for character counter.
 ?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:paragraph {"className":"status-paragraph","fontSize":"large"} -->
-	<p class="status-paragraph has-large-font-size"></p>
-	<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
+<!-- wp:paragraph {"className":"status-paragraph","fontSize":"large"} -->
+<p class="status-paragraph has-large-font-size"></p>
+<!-- /wp:paragraph -->
 

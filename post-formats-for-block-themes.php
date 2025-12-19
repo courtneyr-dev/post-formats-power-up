@@ -3,7 +3,7 @@
  * Plugin Name: Post Formats for Block Themes
  * Plugin URI: https://wordpress.org/plugins/post-formats-for-block-themes/
  * Description: Modernizes WordPress post formats for block themes with format-specific patterns, auto-detection, and enhanced editor experience.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Requires at least: 6.8
  * Tested up to: 6.9
  * Requires PHP: 7.4
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants
  */
-define( 'PFBT_VERSION', '1.1.2' );
+define( 'PFBT_VERSION', '1.1.3' );
 define( 'PFBT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PFBT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PFBT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -377,5 +377,48 @@ function pfbt_deactivate() {
 	// Cleanup transients.
 	delete_transient( 'pfbt_bookmark_card_available' );
 	delete_transient( 'pfbt_chatlog_block_available' );
+	delete_transient( 'pfbt_patterns_registered' );
 }
 register_deactivation_hook( __FILE__, 'pfbt_deactivate' );
+
+/**
+ * Add plugin action links
+ *
+ * Adds a "Settings" link to the plugin's row on the Plugins page
+ * that links to the Post Format Repair tool.
+ *
+ * @since 1.1.3
+ *
+ * @param array $links Existing plugin action links.
+ * @return array Modified plugin action links.
+ */
+function pfbt_plugin_action_links( $links ) {
+	$settings_link = sprintf(
+		'<a href="%s">%s</a>',
+		esc_url( admin_url( 'tools.php?page=pfbt-repair-tool' ) ),
+		esc_html__( 'Settings', 'post-formats-for-block-themes' )
+	);
+	array_unshift( $links, $settings_link );
+	return $links;
+}
+add_filter( 'plugin_action_links_' . PFBT_PLUGIN_BASENAME, 'pfbt_plugin_action_links' );
+
+/**
+ * Limit revisions for wp_block post type
+ *
+ * Synced patterns are stored as wp_block posts. Limit revisions
+ * to prevent database bloat from pattern updates.
+ *
+ * @since 1.1.3
+ *
+ * @param int     $num  Number of revisions to keep.
+ * @param WP_Post $post The post object.
+ * @return int Modified number of revisions.
+ */
+function pfbt_limit_wp_block_revisions( $num, $post ) {
+	if ( 'wp_block' === $post->post_type ) {
+		return 3;
+	}
+	return $num;
+}
+add_filter( 'wp_revisions_to_keep', 'pfbt_limit_wp_block_revisions', 10, 2 );

@@ -88,9 +88,27 @@ class PFBT_Pattern_Manager {
 	 * Creates synced reusable blocks for each pattern.
 	 * Only synced blocks are created to avoid duplicates.
 	 *
+	 * PERFORMANCE FIX: Only runs on plugin activation or when patterns
+	 * are missing. Uses a transient to avoid checking on every page load.
+	 *
 	 * @since 1.0.0
 	 */
 	public static function register_all_patterns() {
+		// PERFORMANCE: Skip on front-end entirely.
+		if ( ! is_admin() && ! wp_doing_ajax() && ! ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
+		// PERFORMANCE: Use transient to avoid running on every admin page load.
+		// Patterns only need to be created once, then they persist in the database.
+		$patterns_version = PFBT_VERSION;
+		$cached_version   = get_transient( 'pfbt_patterns_registered' );
+
+		// Skip if patterns were already registered for this plugin version.
+		if ( $cached_version === $patterns_version ) {
+			return;
+		}
+
 		$instance = self::instance();
 		$formats  = PFBT_Format_Registry::get_all_formats();
 
@@ -98,6 +116,21 @@ class PFBT_Pattern_Manager {
 			// Only create synced patterns, no regular patterns.
 			$instance->create_synced_pattern( $slug, $format );
 		}
+
+		// Mark patterns as registered for 1 week (they persist in database anyway).
+		set_transient( 'pfbt_patterns_registered', $patterns_version, WEEK_IN_SECONDS );
+	}
+
+	/**
+	 * Force re-registration of patterns
+	 *
+	 * Called on plugin activation to ensure patterns are up to date.
+	 *
+	 * @since 1.1.3
+	 */
+	public static function force_register_patterns() {
+		delete_transient( 'pfbt_patterns_registered' );
+		self::register_all_patterns();
 	}
 
 	/**
@@ -156,6 +189,9 @@ class PFBT_Pattern_Manager {
 	 * This allows the pattern to be synced - when admin edits it,
 	 * all instances update automatically.
 	 *
+	 * PERFORMANCE FIX: Only updates existing blocks when content has
+	 * actually changed to avoid creating unnecessary revisions.
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $slug   Format slug.
@@ -187,21 +223,37 @@ class PFBT_Pattern_Manager {
 			$format['name']
 		);
 
-		$block_data = array(
-			'post_title'   => $block_title,
-			'post_content' => $pattern_content,
-			'post_status'  => 'publish',
-			'post_type'    => 'wp_block',
-			'post_name'    => $block_slug,
-		);
-
 		if ( $existing_block ) {
-			// Update existing reusable block.
-			$block_data['ID'] = $existing_block->ID;
-			$block_id         = wp_update_post( $block_data );
+			// PERFORMANCE: Only update if content has actually changed.
+			// This prevents creating revisions on every admin page load.
+			$content_changed = ( trim( $existing_block->post_content ) !== trim( $pattern_content ) );
+			$title_changed   = ( $existing_block->post_title !== $block_title );
+
+			if ( ! $content_changed && ! $title_changed ) {
+				// Content unchanged - skip update to avoid revision creation.
+				$block_id = $existing_block->ID;
+			} else {
+				// Content changed - update the block.
+				$block_data = array(
+					'ID'           => $existing_block->ID,
+					'post_title'   => $block_title,
+					'post_content' => $pattern_content,
+					'post_status'  => 'publish',
+					'post_type'    => 'wp_block',
+					'post_name'    => $block_slug,
+				);
+				$block_id   = wp_update_post( $block_data );
+			}
 		} else {
 			// Create new reusable block.
-			$block_id = wp_insert_post( $block_data );
+			$block_data = array(
+				'post_title'   => $block_title,
+				'post_content' => $pattern_content,
+				'post_status'  => 'publish',
+				'post_type'    => 'wp_block',
+				'post_name'    => $block_slug,
+			);
+			$block_id   = wp_insert_post( $block_data );
 
 			// Add metadata to identify this as a post format pattern.
 			if ( $block_id && ! is_wp_error( $block_id ) ) {
@@ -209,23 +261,29 @@ class PFBT_Pattern_Manager {
 			}
 		}
 
-		// Assign to Post formats category.
+		// Assign to Post formats category (only for new blocks or if category missing).
 		if ( $block_id && ! is_wp_error( $block_id ) ) {
-			// Get or create the category term.
-			$category_term = get_term_by( 'slug', 'post-formats', 'wp_pattern_category' );
+			// PERFORMANCE: Check if block already has the correct category.
+			$existing_terms = wp_get_object_terms( $block_id, 'wp_pattern_category', array( 'fields' => 'slugs' ) );
+			$has_category   = ! is_wp_error( $existing_terms ) && in_array( 'post-formats', $existing_terms, true );
 
-			if ( ! $category_term ) {
-				$category_term = wp_insert_term(
-					__( 'Post formats', 'post-formats-for-block-themes' ),
-					'wp_pattern_category',
-					array( 'slug' => 'post-formats' )
-				);
-			}
+			if ( ! $has_category ) {
+				// Get or create the category term.
+				$category_term = get_term_by( 'slug', 'post-formats', 'wp_pattern_category' );
 
-			// Assign the category to the block.
-			if ( $category_term && ! is_wp_error( $category_term ) ) {
-				$term_id = is_array( $category_term ) ? $category_term['term_id'] : $category_term->term_id;
-				wp_set_object_terms( $block_id, $term_id, 'wp_pattern_category' );
+				if ( ! $category_term ) {
+					$category_term = wp_insert_term(
+						__( 'Post formats', 'post-formats-for-block-themes' ),
+						'wp_pattern_category',
+						array( 'slug' => 'post-formats' )
+					);
+				}
+
+				// Assign the category to the block.
+				if ( $category_term && ! is_wp_error( $category_term ) ) {
+					$term_id = is_array( $category_term ) ? $category_term['term_id'] : $category_term->term_id;
+					wp_set_object_terms( $block_id, $term_id, 'wp_pattern_category' );
+				}
 			}
 		}
 	}

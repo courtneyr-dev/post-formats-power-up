@@ -169,7 +169,7 @@ class PFBT_Admin_Columns {
 	private function get_format_icon( $format ) {
 		$icons = array(
 			'standard' => 'dashicons-admin-post',
-			'aside'    => 'dashicons-aside',
+			'aside'    => 'dashicons-format-aside',
 			'gallery'  => 'dashicons-format-gallery',
 			'link'     => 'dashicons-admin-links',
 			'image'    => 'dashicons-format-image',

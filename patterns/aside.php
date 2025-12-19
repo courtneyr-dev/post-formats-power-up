@@ -13,10 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 ?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:paragraph -->
-	<p></p>
-	<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

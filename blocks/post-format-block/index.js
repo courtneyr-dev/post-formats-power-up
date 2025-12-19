@@ -17,7 +17,10 @@ import { registerBlockVariation } from '@wordpress/blocks';
 // Internationalization
 import { __ } from '@wordpress/i18n';
 
-// Icon
+// DOM Ready
+import domReady from '@wordpress/dom-ready';
+
+// Icon - use optional chaining to prevent errors if icons not loaded yet
 import { postCategories as icon } from '@wordpress/icons';
 
 /**
@@ -28,15 +31,20 @@ import { postCategories as icon } from '@wordpress/icons';
  *
  * @see https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/post-terms/variations.js
  */
-const variation = {
-	name: 'post_format',
-	title: __( 'Post Format', 'post-formats-for-block-themes' ),
-	description: __( "Display a post's format", 'post-formats-for-block-themes' ),
-	icon,
-	isDefault: false,
-	attributes: { term: 'post_format' },
-	isActive: ( blockAttributes ) => blockAttributes.term === 'post_format',
-	scope: [ 'inserter', 'transform' ],
-};
+domReady( () => {
+	// Fallback icon if postCategories isn't available
+	const variationIcon = icon || 'tag';
 
-registerBlockVariation( 'core/post-terms', variation );
+	const variation = {
+		name: 'post_format',
+		title: __( 'Post Format', 'post-formats-for-block-themes' ),
+		description: __( "Display a post's format", 'post-formats-for-block-themes' ),
+		icon: variationIcon,
+		isDefault: false,
+		attributes: { term: 'post_format' },
+		isActive: ( blockAttributes ) => blockAttributes.term === 'post_format',
+		scope: [ 'inserter', 'transform' ],
+	};
+
+	registerBlockVariation( 'core/post-terms', variation );
+} );

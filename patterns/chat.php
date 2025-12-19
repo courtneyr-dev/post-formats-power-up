@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Chat Post Format Pattern
  *
- * Chat transcript or conversation log. Uses the Chat Log block.
+ * Chat transcript or conversation log. Uses the Chat Log block followed by a paragraph.
  *
  * Note: Requires the Chat Log plugin to be active.
  * If plugin is inactive, block will show as "missing block" (standard WP behavior).
@@ -15,9 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 ?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:chatlog/conversation /-->
-</div>
-<!-- /wp:group -->
+<!-- wp:chatlog/conversation /-->
 
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

@@ -6,17 +6,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Image Post Format Pattern
  *
- * Single image post. Starts with an image block.
+ * Single image post. Starts with an image block followed by a paragraph.
  *
  * @package PostFormatsBlockThemes
  * @since 1.0.0
  */
 ?>
-<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group">
-	<!-- wp:image {"sizeSlug":"large"} -->
-	<figure class="wp-block-image size-large"><img alt=""/></figure>
-	<!-- /wp:image -->
-</div>
-<!-- /wp:group -->
+<!-- wp:image {"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img alt=""/></figure>
+<!-- /wp:image -->
 
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

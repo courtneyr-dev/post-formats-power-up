@@ -2,10 +2,10 @@
 Contributors: courane01
 Donate link: https://github.com/sponsors/courtneyr-dev
 Tags: post-formats, block-theme, patterns, block-editor, chat-log
-Requires at least: 6.8
+Requires at least: 6.9
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.4
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -241,7 +241,7 @@ More filters and actions available for pattern content modification, post-repair
 
 = Minimum Requirements =
 
-* WordPress 6.8 or higher
+* WordPress 6.9 or higher
 * PHP 7.4 or higher
 * A block theme (Classic themes not supported)
 * JavaScript enabled in browser
@@ -275,7 +275,7 @@ More filters and actions available for pattern content modification, post-repair
 
 = Does this work with classic themes? =
 
-No, this plugin requires block themes with Full Site Editing. Classic themes use PHP templates incompatible with block patterns. This plugin requires block theme with theme.json, block templates in templates/ folder, and WordPress 6.8+. Consider migrating to a modern block theme like Twenty Twenty-Five.
+No, this plugin requires block themes with Full Site Editing. Classic themes use PHP templates incompatible with block patterns. This plugin requires block theme with theme.json, block templates in templates/ folder, and WordPress 6.9+. Consider migrating to a modern block theme like Twenty Twenty-Five.
 
 = Will this work with my existing posts? =
 
@@ -346,6 +346,52 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 8. Gallery format pattern with locked gallery block displaying responsive grid layout adapting to theme columns
 
 == Changelog ==
+
+= 1.2.0 =
+
+**New Features**
+
+* **Added:** WordPress Abilities API integration (requires WordPress 6.9+)
+* **Added:** Six core abilities for machine-readable post format operations:
+  - `post_formats/list_formats` - List all formats with metadata and post counts
+  - `post_formats/get_format_template` - Get template and pattern info for a format
+  - `post_formats/validate_format` - Validate content against format requirements
+  - `post_formats/set_post_format` - Set format on a post
+  - `post_formats/get_post_format` - Get current format of a post
+  - `post_formats/detect_format` - Detect appropriate format from content
+* **Added:** Five IndieWeb abilities for microformats2, POSSE, and webmentions:
+  - `post_formats/mf2_markup` - Generate microformats2 markup for a post
+  - `post_formats/mf2_validate` - Validate mf2 output for a post
+  - `post_formats/posse_prepare` - Prepare content for POSSE syndication
+  - `post_formats/posse_targets` - Get available syndication targets
+  - `post_formats/webmention_context` - Get webmention context for a format
+* **Added:** Four MCP abilities for AI-powered format suggestions:
+  - `post_formats/suggest_format` - Analyze content and suggest appropriate format
+  - `post_formats/analyze_content` - Detailed content analysis with signals and scores
+  - `post_formats/validate_format_content` - Validate content for a specific format
+  - `post_formats/get_format_signals` - Get signal weights for format detection
+* **Added:** Feature flags system for optional integrations (IndieWeb, MCP, ActivityPub)
+* **Added:** Microformats2 markup generation with format-specific classes (h-entry, p-note, h-cite, u-photo, etc.)
+* **Added:** POSSE content preparation for Twitter/X, Mastodon, Bluesky, Threads, LinkedIn, Tumblr
+* **Added:** Webmention context mapping for format-specific interaction types
+* **Added:** `pfbt_abilities_registered` action for extending abilities
+
+**Requirements**
+
+* **Changed:** Minimum WordPress version increased to 6.9 (for Abilities API support)
+
+**Developer**
+
+* **Added:** `PFBT_Feature_Flags` class for managing optional feature toggles
+* **Added:** `PFBT_Abilities_Manager` class for Abilities API registration
+* **Added:** `PFBT_Core_Abilities` class with core format abilities
+* **Added:** `PFBT_IndieWeb_Abilities` class with IndieWeb abilities
+* **Added:** `PFBT_MCP_Abilities` class for AI-powered format suggestions
+* **Added:** `PFBT_Format_Analyzer` class for content signal detection
+* **Added:** `PFBT_Format_Mf2` class for microformats2 generation
+* **Added:** `PFBT_Posse_Transformer` class for POSSE syndication preparation
+* **Added:** `PFBT_Webmention_Context` class for webmention handling
+* **Added:** Unit tests for all abilities, IndieWeb, and MCP classes
 
 = 1.1.4 - 2025-12-19 =
 
@@ -506,6 +552,9 @@ Yes! Fully multisite compatible. Install network-wide or per-site, each site has
 * **Privacy:** No data collection, external API calls, cookies, or user tracking
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Major feature release: Adds WordPress Abilities API integration for machine-readable post format operations. Requires WordPress 6.9+. Includes feature flags system for future IndieWeb, MCP, and ActivityPub integrations.
 
 = 1.1.4 =
 Critical fix: Resolves issue where plugin's theme.json was overriding theme layout settings and causing blank templates. All users should upgrade immediately.

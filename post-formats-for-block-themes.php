@@ -3,8 +3,8 @@
  * Plugin Name: Post Formats for Block Themes
  * Plugin URI: https://wordpress.org/plugins/post-formats-for-block-themes/
  * Description: Modernizes WordPress post formats for block themes with format-specific patterns, auto-detection, and enhanced editor experience.
- * Version: 1.1.4
- * Requires at least: 6.8
+ * Version: 1.2.0
+ * Requires at least: 6.9
  * Tested up to: 6.9
  * Requires PHP: 7.4
  * Author: Courtney Robertson
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants
  */
-define( 'PFBT_VERSION', '1.1.4' );
+define( 'PFBT_VERSION', '1.2.0' );
 define( 'PFBT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PFBT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PFBT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -144,6 +144,10 @@ function pfbt_include_files() {
 	require_once PFBT_PLUGIN_DIR . 'includes/class-format-styles.php';
 	require_once PFBT_PLUGIN_DIR . 'includes/class-admin-columns.php';
 
+	// Feature flags and Abilities API (v1.2.0+).
+	require_once PFBT_PLUGIN_DIR . 'includes/class-pfbt-feature-flags.php';
+	require_once PFBT_PLUGIN_DIR . 'includes/class-pfbt-abilities-manager.php';
+
 	// Include Chat Log block (integrated)
 	// This provides the chatlog/conversation block for the Chat post format
 	require_once PFBT_PLUGIN_DIR . 'blocks/chatlog/chatlog-block.php';
@@ -197,6 +201,17 @@ function pfbt_init() {
 	PFBT_Pattern_Manager::instance();
 	PFBT_Block_Locker::instance();
 	PFBT_Admin_Columns::instance();
+
+	// Initialize Abilities API integration (v1.2.0+).
+	if ( PFBT_Feature_Flags::has_abilities_api() ) {
+		PFBT_Abilities_Manager::instance();
+	}
+
+	// Initialize IndieWeb integration (v1.2.0+).
+	if ( PFBT_Feature_Flags::has_indieweb() ) {
+		require_once PFBT_PLUGIN_DIR . 'includes/mf2/class-pfbt-format-mf2.php';
+		PFBT_Format_Mf2::instance();
+	}
 
 	// Register patterns after WordPress is fully loaded.
 	add_action( 'init', array( 'PFBT_Pattern_Manager', 'register_all_patterns' ) );
@@ -341,10 +356,10 @@ add_action( 'init', 'pfbt_register_patterns', 20 );
  */
 function pfbt_activate() {
 	// Check WordPress version.
-	if ( version_compare( get_bloginfo( 'version' ), '6.8', '<' ) ) {
+	if ( version_compare( get_bloginfo( 'version' ), '6.9', '<' ) ) {
 		deactivate_plugins( PFBT_PLUGIN_BASENAME );
 		wp_die(
-			esc_html__( 'Post Formats for Block Themes requires WordPress 6.8 or higher.', 'post-formats-for-block-themes' ),
+			esc_html__( 'Post Formats for Block Themes requires WordPress 6.9 or higher.', 'post-formats-for-block-themes' ),
 			esc_html__( 'Plugin Activation Error', 'post-formats-for-block-themes' ),
 			array( 'back_link' => true )
 		);
